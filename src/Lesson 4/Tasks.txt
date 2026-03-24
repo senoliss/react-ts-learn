@@ -1,0 +1,78 @@
+⭐ LESSON 4 — Build a Mini Game UI (Health, Mana, XP, Score)
+Now we combine everything you’ve learned into a small, game‑like UI panel.
+In this lesson you will create:
+✅ A Health Bar
+✅ A Mana Bar
+✅ An XP Counter
+✅ A Score Counter
+Each one will use:
+
+useState
+typed props
+typed events
+
+Let’s build them one by one.
+
+✅ Step 1 — HealthBar Component
+Create a file:
+
+HealthBar.tsx
+
+import { useState } from "react";
+
+export function HealthBar() {
+    const [health, setHealth] = useState<number>(100);
+
+    const takeDamage = () => setHealth(h => Math.max(0, h - 10));
+    const heal = () => setHealth(h => Math.min(100, h + 10));
+
+    return (
+        <div>
+            <h3>Health: {health}</h3>
+            <button onClick={takeDamage}>Take Damage (-10)</button>
+            <button onClick={heal}>Heal (+10)</button>
+        </div>
+    );
+}
+
+✅ You learn how to update state using a callback
+✅ Clamped values (0–100)
+✅ Real “game-like” logic
+
+✅ Step 2 — Add it to App
+
+import { HealthBar } from "./HealthBar";
+
+// inside App()
+
+<HealthBar />
+
+Try it — you’ll see a working game health system.
+
+✅ YOUR TASK (Mini‑Exercise 4)
+Now you build the ManaBar:
+✔ ManaBar Requirements
+
+Start with mana = 50
+Maximum mana = 100
+"Cast Spell" button reduces mana by 15
+"Regenerate" button increases mana by 10
+Values must clamp between 0 and 100
+Show display:
+Mana: X / 100
+
+Example in App:
+<ManaBar />Show more lines
+
+✅ When you finish:
+Send me your:
+✅ ManaBar.tsx code
+✅ I will review and correct it
+✅ Then we proceed to Lesson 5: Creating a Real Component Tree for Your Game
+This will introduce:
+
+    Component architecture
+    Parent → child props
+    Lifting state
+    React context
+    Game logic organization
