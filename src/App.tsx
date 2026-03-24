@@ -5,6 +5,7 @@ import { PlayerCard } from './Lesson 1-2/PlayerCard';
 import { PlayerNameInput } from './Lesson 3/PlayerNameInput';
 import { ScoreInput } from './Lesson 3/ScoreInput';
 import { HealthBar } from './Lesson 4/HealthBar';
+import { ManaBar } from './Lesson 4/ManaBar';
 
 function App() {
     return (
@@ -16,7 +17,8 @@ function App() {
                 <LevelUp /> */}
                 <PlayerNameInput />
                 <ScoreInput />
-                <HealthBar />
+                <HealthBar /> 
+                <ManaBar />
             </div>
     );
 }
