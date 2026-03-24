@@ -13,8 +13,8 @@ export function PlayerNameInput() {
             <input type="text" value={name} onChange={handleChange} />
             <p>Player Name: {name}</p>
             <br/>
-            <p>In this component, we use a controlled input to manage the player's name.</p>
-            <p>As you type, the state updates and the UI reflects the current name.</p>
+            {/* <p>In this component, we use a controlled input to manage the player's name.</p>
+            <p>As you type, the state updates and the UI reflects the current name.</p> */}
         </div>
     );
 }

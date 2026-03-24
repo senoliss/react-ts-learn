@@ -1,17 +1,18 @@
-import {useState} from 'react';
-/// a simple component to demonstrate a health bar in React
-export function HealthBar() {
-    const [health, setHealth] = useState<number>(100);
-    const maxHealth = 100;
+import { useState } from "react";
 
-    const takeDamage = () => setHealth(h => Math.max(0, h - 10));
-    const heal = () => setHealth(h => Math.min(maxHealth, h + 10));
+export function XPBar() {
+    const [xp, setXp] = useState<number>(0);
+    const maxXp = 100;
 
-    const percentage = (health / maxHealth) * 100;
+    const gainXp = () => setXp(x => Math.min(maxXp, x + 10));
+    const spendXp = () => setXp(x => Math.max(0, x - 10));
+
+    const percentage = (xp / maxXp) * 100;
 
     return (
-        <div style={{ width: "350px",margin: '0 auto' }}>
-            <h3>Health: {health} / {maxHealth}</h3>
+        <div style={{ width: "350px", margin: '0 auto' }}>
+            <h3>Experience Points: {xp} / {maxXp}</h3>
+
             <div
                 style={{
                     width: "100%",
@@ -26,14 +27,15 @@ export function HealthBar() {
                     style={{
                         width: `${percentage}%`,
                         height: "100%",
-                        backgroundColor: "#27ae60",
+                        backgroundColor: "gold",
                         transition: "width 0.34s ease"
                     }}
                 />
             </div>
+
             <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-                <button onClick={takeDamage}>Take Damage (-10)</button>
-                <button onClick={heal}>Heal (+10)</button>
+                <button onClick={gainXp}>Gain XP (+10)</button>
+                <button onClick={spendXp}>Spend XP (-10)</button>
             </div>
         </div>
     );
