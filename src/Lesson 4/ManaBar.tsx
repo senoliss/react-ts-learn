@@ -1,15 +1,13 @@
-type ManaProps = {
-    mana: number;
-    maxMana: number;
-    onCastSpell: () => void;
-    onRegenerateMana: () => void;
-};
+import { useGame } from "../Lesson 6/GameContext";
 
-export function ManaBar({ mana, maxMana, onCastSpell, onRegenerateMana }: ManaProps) {
+export function ManaBar() {
+    const { mana, castSpell, regenMana } = useGame();
+    const maxMana = 100;
+
     const percentage = (mana / maxMana) * 100;
 
     return (
-        <div style={{ width: "350px", margin: '20px auto' }}>
+        <div style={{ width: "350px", margin: "20px auto" }}>
             <h3>Mana: {mana} / {maxMana}</h3>
 
             <div
@@ -32,10 +30,10 @@ export function ManaBar({ mana, maxMana, onCastSpell, onRegenerateMana }: ManaPr
                     }}
                 />
             </div>
-            
+
             <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-                <button onClick={onCastSpell}>Cast Spell (-15)</button>
-                <button onClick={onRegenerateMana}>Regenerate Mana (+10)</button>
+                <button onClick={() => castSpell(15)}>Cast Spell (-15)</button>
+                <button onClick={() => regenMana(10)}>Regenerate Mana (+10)</button>
             </div>
         </div>
     );

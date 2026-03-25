@@ -1,18 +1,15 @@
-type HealthProps = {
-    health: number;
-    maxHealth: number;
-    onDamage: () => void;
-    onHeal: () => void;
-};
-        
-export function HealthBar({health, maxHealth, onDamage, onHeal}: HealthProps) {
+import { useGame } from "../Lesson 6/GameContext";
 
+export function HealthBar() {
+    const { health, takeDamage, heal } = useGame();
+    const maxHealth = 100;
 
     const percentage = (health / maxHealth) * 100;
 
     return (
-        <div style={{ width: "350px",margin: '0 auto' }}>
+        <div style={{ width: "350px", margin: "0 auto" }}>
             <h3>Health: {health} / {maxHealth}</h3>
+
             <div
                 style={{
                     width: "100%",
@@ -32,9 +29,10 @@ export function HealthBar({health, maxHealth, onDamage, onHeal}: HealthProps) {
                     }}
                 />
             </div>
+
             <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-                <button onClick={onDamage}>Take Damage (-10)</button>
-                <button onClick={onHeal}>Heal (+10)</button>
+                <button onClick={() => takeDamage(10)}>Take Damage (-10)</button>
+                <button onClick={() => heal(10)}>Heal (+10)</button>
             </div>
         </div>
     );

@@ -1,10 +1,9 @@
-type XPBarProps = {
-    xp: number;
-    maxXp: number;
-    onGainXp: () => void;   // XP increases
-};
+import { useGame } from "../Lesson 6/GameContext";
 
-export function XPBar({ xp, maxXp, onGainXp }: XPBarProps) {
+export function XPBar() {
+    const { xp, gainXP } = useGame();
+    const maxXp = 100;
+
     const percentage = (xp / maxXp) * 100;
 
     return (
@@ -32,7 +31,7 @@ export function XPBar({ xp, maxXp, onGainXp }: XPBarProps) {
             </div>
 
             <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-                <button onClick={onGainXp}>Gain XP (+10)</button>
+                <button onClick={() => gainXP(10)}>Gain XP (+10)</button>
             </div>
         </div>
     );
