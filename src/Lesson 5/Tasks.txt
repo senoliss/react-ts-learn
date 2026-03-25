@@ -154,3 +154,37 @@ A) HealthBar, ManaBar, XPBar, Score
 B) GamePanel
 C) Each component keeps its own logic
 D) We will put all logic in Context immediately
+
+--> B
+
+✅ Step 1 — Create basic GamePanel component
+
+    No logic yet
+    Just the structure
+    Import your UI components (HealthBar, ManaBar, XPBar, Score)
+
+✅ Step 2 — Move all the state from children → into GamePanel
+
+    health, mana, xp, score
+    TypeScript typing
+    Default values
+
+✅ Step 3 — Create callback functions
+
+    takeDamage
+    heal
+    castSpell
+    regenMana
+    gainXP
+    addScore
+    resetGame (optional)
+
+✅ Step 4 — Pass values + callbacks to children
+
+    Convert children into presentational components
+
+✅ Step 5 — Remove state logic from children
+
+    They no longer have useState, only props
+
+After that, Lesson 6 will move into Context API so the whole app can read game state.

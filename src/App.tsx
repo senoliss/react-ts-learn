@@ -7,6 +7,7 @@ import { Score } from './Lesson 4/Score';
 import { HealthBar } from './Lesson 4/HealthBar';
 import { ManaBar } from './Lesson 4/ManaBar';
 import { XPBar } from './Lesson 4/XPBar';
+import { GamePanel } from './GamePanel';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Hello name="Marius" />
                 <PlayerCard nickname="ShadowWolf" level={12} />
                 <LevelUp /> */}
+                <GamePanel />
                 <PlayerNameInput />
                 <XPBar />
                 <Score />
