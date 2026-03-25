@@ -1,10 +1,10 @@
 import { useState } from "react";
-import styles from "./Styles/GamePanel.module.css";
+import styles from "../Styles/GamePanel.module.css";
 
-import { HealthBar } from "./Lesson 4/HealthBar";
-import { ManaBar } from "./Lesson 4/ManaBar";
-import { XPBar } from "./Lesson 4/XPBar";
-import { Score } from "./Lesson 4/Score";
+import { HealthBar } from "../Lesson 4/HealthBar";
+import { ManaBar } from "../Lesson 4/ManaBar";
+import { XPBar } from "../Lesson 4/XPBar";
+import { Score } from "../Lesson 4/Score";
 
 export function GamePanel() {
 

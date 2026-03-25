@@ -7,7 +7,7 @@ import { Score } from './Lesson 4/Score';
 import { HealthBar } from './Lesson 4/HealthBar';
 import { ManaBar } from './Lesson 4/ManaBar';
 import { XPBar } from './Lesson 4/XPBar';
-import { GamePanel } from './GamePanel';
+import { GamePanel } from './Lesson 5/GamePanel';
 
 function App() {
     return (

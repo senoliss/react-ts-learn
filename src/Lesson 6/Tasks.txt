@@ -1,0 +1,158 @@
+✅ LESSON 6 — Context API with TypeScript
+Goal: Stop passing props down manually and avoid “prop drilling”.
+
+We will create:
+    ✅ GameContext.tsx
+    ✅ A provider component
+    ✅ A custom hook useGame()
+    ✅ Move all GamePanel logic into global context
+    ✅ Make all UI components read from context
+This makes your code:
+    cleaner
+    scalable
+    more realistic for real games
+    easier to extend (inventory, enemy AI, quests, etc)
+
+
+    ✅ 1. Why Context API Is Needed
+You currently have:
+    GamePanel
+    ├── HealthBar
+    ├── ManaBar
+    ├── XPBar
+    └── Score
+
+Right now it's fine because everything is in one parent, but imagine:
+
+    adding an inventory panel
+    adding an enemy panel
+    adding a top navigation bar
+    adding a HUD in the header
+
+Suddenly, you’d need to pass props like:
+
+    health
+    mana
+    xp
+    score
+    takeDamage
+    castSpell
+    gainXP
+    …
+
+…through multiple layers of components.
+This is called prop drilling, and it quickly becomes messy.
+✅ Context API solves this problem.
+
+✅ 2. What Context API Does
+The Context API allows you to create global state that any component in your app can access without passing props.
+Without context:
+    <App>
+        <Layout>
+            <Sidebar>
+                <PlayerStatsPanel>
+                    <HealthBar health={health} onDamage={...} />
+
+Health has to be passed from parent → child → child → child.
+    ❌ Annoying
+    ❌ Repetitive
+    ❌ Difficult to maintain
+
+With context:
+    <App>
+        <HealthBar /> ← automatically gets health from context
+
+    ✅ No props
+    ✅ No drilling
+    ✅ Components can subscribe to game state anywhere
+    ✅ Cleaner game architecture
+
+✅ 3. How Context Will Work in Your Game
+We will create:
+GameContext.tsx
+
+Inside it you will define:
+✅ All game state
+    health, mana, xp, score
+
+✅ All game actions
+    takeDamage, heal, castSpell, regenMana, gainXP, addScore
+
+✅ A provider component
+    <GameProvider> ...children... </GameProvider>
+
+This wraps your entire app.
+
+✅ A custom hook
+    const game = useGame();
+
+This gives any component direct access to the game state:
+    const { health, takeDamage } = useGame();
+
+✅ 4. How TypeScript Fits Into This
+Context API + TypeScript requires defining two things:
+
+✅ The shape of your game state
+    type GameState = {
+        health: number;
+        mana: number;
+        xp: number;
+        score: number;
+    };
+
+✅ The shape of your game actions
+    type GameActions = {
+        takeDamage: (amount: number) => void;
+        heal: (amount: number) => void;
+        castSpell: (cost: number) => void;
+        regenMana: (amount: number) => void;
+        gainXP: (amount: number) => void;
+        addScore: (amount: number) => void;
+    };
+
+Then combine them into one type used by Context:
+    type GameContextType = GameState & GameActions;
+
+This gives you perfect type‑safety everywhere.
+
+✅ 5. How Your Final Architecture Will Look
+    src/
+    ├── GameContext.tsx   ← global game state
+    ├── GameProvider.tsx  ← wraps the whole app
+    ├── useGame.ts        ← custom hook
+    ├── GamePanel.tsx
+    ├── Components/
+    │     ├── HealthBar.tsx
+    │     ├── ManaBar.tsx
+    │     ├── XPBar.tsx
+    │     └── Score.tsx
+    └── Styles/
+
+After using context:
+    GamePanel will no longer hold state
+    Child components will not receive props
+    Everything becomes cleaner
+
+Example:
+
+    export function HealthBar() {
+    const { health, maxHealth, takeDamage, heal } = useGame();
+    ...
+    }
+
+That is the power of context.
+
+✅ 6. Summary of What You Learned
+
+By the end of Lesson 6, you will understand:
+    ✅ What Context API is
+    ✅ Why prop drilling is bad
+    ✅ How to model global game state in TypeScript
+    ✅ How to build a GameProvider
+    ✅ How to build a custom hook useGame()
+    ✅ How to update all UI components to use context
+
+This sets the stage for:
+    lesson on custom hooks
+    game logic separation
+    creating a real playable mini‑game
