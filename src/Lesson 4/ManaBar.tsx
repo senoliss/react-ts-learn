@@ -1,12 +1,11 @@
-import { useState } from "react";
+type ManaProps = {
+    mana: number;
+    maxMana: number;
+    onCastSpell: () => void;
+    onRegenerateMana: () => void;
+};
 
-export function ManaBar() {
-    const [mana, setMana] = useState<number>(100);
-    const maxMana = 100;
-
-    const castSpell = () => setMana(m => Math.max(0, m - 15));
-    const regenerateMana = () => setMana(m => Math.min(maxMana, m + 10));
-
+export function ManaBar({ mana, maxMana, onCastSpell, onRegenerateMana }: ManaProps) {
     const percentage = (mana / maxMana) * 100;
 
     return (
@@ -33,9 +32,10 @@ export function ManaBar() {
                     }}
                 />
             </div>
+            
             <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-                <button onClick={castSpell}>Cast Spell (-15)</button>
-                <button onClick={regenerateMana}>Regenerate Mana (+10)</button>
+                <button onClick={onCastSpell}>Cast Spell (-15)</button>
+                <button onClick={onRegenerateMana}>Regenerate Mana (+10)</button>
             </div>
         </div>
     );

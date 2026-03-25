@@ -1,11 +1,12 @@
-import {useState} from 'react';
-/// a simple component to demonstrate a health bar in React
-export function HealthBar() {
-    const [health, setHealth] = useState<number>(100);
-    const maxHealth = 100;
+type HealthProps = {
+    health: number;
+    maxHealth: number;
+    onDamage: () => void;
+    onHeal: () => void;
+};
+        
+export function HealthBar({health, maxHealth, onDamage, onHeal}: HealthProps) {
 
-    const takeDamage = () => setHealth(h => Math.max(0, h - 10));
-    const heal = () => setHealth(h => Math.min(maxHealth, h + 10));
 
     const percentage = (health / maxHealth) * 100;
 
@@ -32,8 +33,8 @@ export function HealthBar() {
                 />
             </div>
             <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-                <button onClick={takeDamage}>Take Damage (-10)</button>
-                <button onClick={heal}>Heal (+10)</button>
+                <button onClick={onDamage}>Take Damage (-10)</button>
+                <button onClick={onHeal}>Heal (+10)</button>
             </div>
         </div>
     );

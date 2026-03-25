@@ -18,11 +18,7 @@ function App() {
                 <PlayerCard nickname="ShadowWolf" level={12} />
                 <LevelUp /> */}
                 <GamePanel />
-                <PlayerNameInput />
-                <XPBar />
-                <Score />
-                <HealthBar /> 
-                <ManaBar />
+                {/* <PlayerNameInput /> */}
             </div>
     );
 }

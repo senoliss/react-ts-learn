@@ -1,16 +1,14 @@
-import { useState } from "react";
+type XPBarProps = {
+    xp: number;
+    maxXp: number;
+    onGainXp: () => void;   // XP increases
+};
 
-export function XPBar() {
-    const [xp, setXp] = useState<number>(0);
-    const maxXp = 100;
-
-    const gainXp = () => setXp(x => Math.min(maxXp, x + 10));
-    const spendXp = () => setXp(x => Math.max(0, x - 10));
-
+export function XPBar({ xp, maxXp, onGainXp }: XPBarProps) {
     const percentage = (xp / maxXp) * 100;
 
     return (
-        <div style={{ width: "350px", margin: '0 auto' }}>
+        <div style={{ width: "350px", margin: "0 auto" }}>
             <h3>Experience Points: {xp} / {maxXp}</h3>
 
             <div
@@ -34,8 +32,7 @@ export function XPBar() {
             </div>
 
             <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-                <button onClick={gainXp}>Gain XP (+10)</button>
-                <button onClick={spendXp}>Spend XP (-10)</button>
+                <button onClick={onGainXp}>Gain XP (+10)</button>
             </div>
         </div>
     );
