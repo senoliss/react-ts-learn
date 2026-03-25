@@ -1,71 +1,32 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
+import { useHealthSystem } from "../Lesson 7/GameLogic/useHealthSystem";
+import { useManaSystem } from "../Lesson 7/GameLogic/useManaSystem";
+import { useScoreSystem } from "../Lesson 7/GameLogic/useScoreSystem";
+import { useXPSystem } from "../Lesson 7/GameLogic/useXPSystem";
 
-// 1. Game state values
-type GameState = {
-    health: number;
-    mana: number;
-    xp: number;
-    score: number;
-};
-
-// 2. Game actions (functions)
-type GameActions = {
-    takeDamage: (amount: number) => void;
-    heal: (amount: number) => void;
-    castSpell: (cost: number) => void;
-    regenMana: (amount: number) => void;
-    gainXP: (amount: number) => void;
-    addScore: (amount: number) => void;
-};
-
-// 3. Combine state and actions into a single context type
-export type GameContextType = GameState & GameActions;
 
 // 4. Create the context with a default value (can be empty or have default functions)
-export const GameContext = createContext<GameContextType | undefined>(undefined);
+export const GameContext = createContext<any>(undefined);
 
 // 5. Create GameProvider component to provide the context to its children
 export function GameProvider({ children }: { children: React.ReactNode }) {
 
     // --- shared game state ---
-    const [health, setHealth] = useState<number>(100);
-    const [mana, setMana] = useState<number>(100);
-    const [xp, setXp] = useState<number>(0);
-    const [score, setScore] = useState<number>(0);
+    const healthSystem = useHealthSystem();
+    const manaSystem = useManaSystem();
+    const xpSystem = useXPSystem();
+    const scoreSystem = useScoreSystem();
 
-    // --- Game actions ---
-    const takeDamage = (amount: number) =>
-        setHealth(h => Math.max(0, h - amount));
-
-    const heal = (amount: number) =>
-        setHealth(h => Math.min(100, h + amount));
-
-    const castSpell = (cost: number) =>
-        setMana(m => Math.max(0, m - cost));
-
-    const regenMana = (amount: number) =>
-        setMana(m => Math.min(100, m + amount));
-
-    const gainXP = (amount: number) =>
-        setXp(x => Math.min(100, x + amount));
-
-    const addScore = (amount: number) =>
-        setScore(s => s + amount);
+    const value = {
+        ...healthSystem,
+        ...manaSystem,
+        ...xpSystem,
+        ...scoreSystem
+    };
 
     // --- Provide state and actions to children ---
     return (
-        <GameContext.Provider value={{
-            health,
-            mana,
-            xp,
-            score,
-            takeDamage,
-            heal,
-            castSpell,
-            regenMana,
-            gainXP,
-            addScore
-        }}>
+        <GameContext.Provider value={value}>
             {children}
         </GameContext.Provider>
     );
@@ -80,3 +41,26 @@ export function useGame() {
 
     return context;
 }
+
+
+// ✅ 1 — The Context (GameContext) = The "Brain" of Your Game
+// In real games:
+
+// There is one place where global game data lives.
+// UI, enemies, combat, items — they all read/write from that data source.
+
+// In your game, that global place is:
+// GameContext.tsx
+
+// This file:
+// ✅ Creates all game logic
+// ✅ Stores all game state
+// ✅ Makes the whole game state accessible anywhere
+// ✅ Allows any component to update the game
+// It is the one and only global store of truth.
+// Everything that needs health/mana/xp/etc reads it from here.
+// ✅ Think of GameContext as:
+// 🧠 The main brain
+// 📡 Broadcasting data to components
+// 📥 Receiving updates from components
+// ♻️ Keeping the game running
