@@ -1,0 +1,96 @@
+✅ LESSON 7 — Custom Hooks + Clean Game Logic Architecture
+You will learn:
+
+    how to create reusable hooks like useHealth(), useMana(), etc.
+    how to modularize logic cleanly
+    organizing game systems (combat, spells, XP leveling)
+    introducing leveling logic
+    adding enemy data later
+    preparing for building a playable mini‑game UI
+
+    This lesson teaches you:
+✅ How to extract logic into reusable hooks
+✅ How to keep UI clean and logic separated
+✅ How to prepare for adding:
+
+level-up mechanics
+spell systems
+combat (enemies soon)
+game events
+HUD components
+✅ How to structure game systems like real game engines
+
+We’ll move slowly and cleanly.
+
+✅ LESSON 7 — Part 1
+Why Custom Hooks Matter (Explanation Only)
+Even with Context, your game logic is currently inside a single provider, which is fine now but will become messy when:
+
+    you add level-up logic
+    you add death conditions
+    you add mana costs per spell
+    you add XP thresholds
+    you add multiple enemies
+    you add inventory
+    you add saving/loading
+
+Your GameProvider will turn into a giant file.
+✅ Custom hooks let us split game logic into logical modules like:
+    useHealthSystem()
+    useManaSystem()
+    useXPSystem()
+    useScoreSystem()
+    useLevelSystem()
+    useCombatSystem()
+
+These hooks then plug into GameProvider cleanly.
+
+✅ LESSON 7 — Part 2
+How We Will Structure GameLogic
+Inside GameContext.tsx we will gradually extract pieces like:
+✅ Health system (damage/healing)
+    function useHealthSystem() {
+        const [health, setHealth] = useState(100);
+
+        const takeDamage = (amount: number) =>
+            setHealth(h => Math.max(0, h - amount));
+
+        const heal = (amount: number) =>
+            setHealth(h => Math.min(100, h + amount));
+
+        return { health, takeDamage, heal };
+    }
+✅ Mana system (casting/regeneration)
+✅ XP system (gain XP, detect level-up)
+✅ Score system (gain/reset score)
+
+Then your GameProvider becomes:
+    export function GameProvider({ children }) {
+        const healthSystem = useHealthSystem();
+        const manaSystem = useManaSystem();
+        const xpSystem = useXPSystem();
+        const scoreSystem = useScoreSystem();
+
+        const value = {
+            ...healthSystem,
+            ...manaSystem,
+            ...xpSystem,
+            ...scoreSystem
+        };
+
+        return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
+    }
+
+✅ Cleaner
+✅ Easier to test
+✅ Easier to expand
+✅ More “game engine”-like design
+
+✅ Why this matters (quick)
+In real games:
+
+    Health logic is separate from mana logic
+    XP/leveling is separate from damage systems
+    Score systems are separate from combat
+
+Custom hooks let you treat your React game the same way.
