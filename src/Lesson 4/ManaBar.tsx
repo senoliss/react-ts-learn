@@ -31,10 +31,10 @@ export function ManaBar() {
                 />
             </div>
 
-            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+            {/* <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
                 <button onClick={() => castSpell(15)}>Cast Spell (-15)</button>
                 <button onClick={() => regenMana(10)}>Regenerate Mana (+10)</button>
-            </div>
+            </div> */}
         </div>
     );
 }

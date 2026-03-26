@@ -1,49 +1,62 @@
 .inventory {
-    padding: 20px;
     text-align: center;
+    height: 100%;        /* ✅ full height of sidebar */
+    display: flex;
+    flex-direction: column;
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 20px;
+    gap: 10px;
+
+    /* ✅ this makes only the grid scrollable, not the title */
+    overflow-y: auto;
+    padding-right: 8px; /* no scrollbar overlap */
+}
+
+.inventory h2 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    letter-spacing: 1px;
 }
 
 .itemCard {
     background: rgba(255, 255, 255, 0.05);
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .icon {
-    font-size: 30px;
+    font-size: 28px;
+    margin-bottom: 4px;
 }
 
 .name {
-    margin-top: 6px;
-    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 4px;
 }
 
 .amount {
+    font-size: 12px;
     color: #aaa;
 }
 
 .buttons {
     display: flex;
-    gap: 8px;
-    margin-top: 10px;
+    gap: 6px;
+    margin-top: 8px;
 }
 
 .buttons button {
-    padding: 4px 6px;
-    font-size: 12px;
-    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 

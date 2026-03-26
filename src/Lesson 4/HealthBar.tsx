@@ -30,10 +30,10 @@ export function HealthBar() {
                 />
             </div>
 
-            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+            {/* <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
                 <button onClick={() => takeDamage(10)}>Take Damage (-10)</button>
                 <button onClick={() => heal(10)}>Heal (+10)</button>
-            </div>
+            </div> */}
         </div>
     );
 }

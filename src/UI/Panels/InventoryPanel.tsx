@@ -1,6 +1,6 @@
-import styles from "./InventoryPanel.module.css";
 import { useGame } from "../../Lesson 6/GameContext";
 import type { Item } from "../../Lesson 7/GameLogic/types";
+import styles from "./InventoryPanel.module.css";
 
 export function InventoryPanel() {
     const { inventory, useItem, removeItem } = useGame();
@@ -11,10 +11,10 @@ export function InventoryPanel() {
 
             <div className={styles.grid}>
                 {inventory.length === 0 && (
-                    <p className={styles.empty}>Your inventory is empty.</p>
+                    <p className={styles.empty}>Empty</p>
                 )}
 
-                {inventory.map((item: Item) =>(
+                {inventory.map((item: Item) => (
                     <div key={item.id} className={styles.itemCard}>
                         <div className={styles.icon}>{item.icon ?? "📦"}</div>
                         <div className={styles.name}>{item.name}</div>
@@ -24,9 +24,10 @@ export function InventoryPanel() {
                             <button onClick={() => useItem(item.id, item.effect)}>
                                 Use
                             </button>
-
-                            <button onClick={() => removeItem(item.id)}
-                                className={styles.drop}>
+                            <button
+                                className={styles.drop}
+                                onClick={() => removeItem(item.id)}
+                            >
                                 Drop
                             </button>
                         </div>

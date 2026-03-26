@@ -31,9 +31,9 @@ export function XPBar() {
                 />
             </div>
 
-            <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+            {/* <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
                 <button onClick={() => gainXP(20)}>Gain XP (+20)</button>
-            </div>
+            </div> */}
         </div>
     );
 }
