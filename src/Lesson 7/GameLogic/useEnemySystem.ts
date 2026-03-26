@@ -104,7 +104,7 @@ export function useEnemySystem(takeDamageFromEnemy: (
     }
 
 
-    // ✅ Enemy auto-attack
+    // ✅ Enemy auto-attack STOPPED WORKING
     useEffect(() => {
         if (gameMode !== "combat") return;
         if (playerHealth <= 0) {
