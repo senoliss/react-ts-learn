@@ -5,6 +5,7 @@ import { EnemyPanel } from "../Panels/EnemyPanel";
 import { InventoryPanel } from "../Panels/InventoryPanel";
 import { useGame } from "../../Lesson 6/GameContext";
 import { HomePanel } from "../Panels/HomePanel";
+import { SidebarTabs } from "../Panels/SidebarTabs";
 
 export function GameLayout() {
     const { gameMode } = useGame();
@@ -27,7 +28,7 @@ export function GameLayout() {
 
                 {/* RIGHT: Inventory sidebar */}
                 <aside className={styles.sidebar}>
-                    <InventoryPanel />
+                    <SidebarTabs />
                 </aside>
 
             </div>

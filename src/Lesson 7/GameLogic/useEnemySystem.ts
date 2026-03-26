@@ -133,5 +133,6 @@ export function useEnemySystem(takeDamageFromEnemy: (
         enemy,
         log,
         playerAttack,
+        addLog
     };
 }

@@ -1,0 +1,45 @@
+export type Spell = {
+    id: string;
+    name: string;
+    icon: string;
+    manaCost: number;
+    cooldown: number;     // milliseconds
+    description: string;
+    type: "damage" | "heal";
+    amount: number;       // damage or healing amount
+};
+
+export const SPELLS: Spell[] = [
+    {
+        id: "fireball",
+        name: "Fireball",
+        icon: "🔥",
+        manaCost: 20,
+        cooldown: 3000,
+        type: "damage",
+        amount: 25,
+        description: "Launches a fireball that deals 25 damage."
+    },
+
+    {
+        id: "ice-lance",
+        name: "Ice Lance",
+        icon: "❄️",
+        manaCost: 15,
+        cooldown: 2500,
+        type: "damage",
+        amount: 18,
+        description: "A sharp icicle that deals moderate damage."
+    },
+
+    {
+        id: "greater-heal",
+        name: "Greater Heal",
+        icon: "✨",
+        manaCost: 25,
+        cooldown: 5000,
+        type: "heal",
+        amount: 30,
+        description: "Heals yourself for 30 HP."
+    }
+];
