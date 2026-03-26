@@ -5,6 +5,7 @@ export function ActionBar() {
     const { takeDamage, heal, castSpell, regenMana, gainXP } = useGame();
     const {addItem} = useGame();
     const { playerAttack } = useGame();
+    const { gameMode, setGameMode } = useGame();
 
     return (
         <div className={styles.actions}>
@@ -38,6 +39,14 @@ export function ActionBar() {
                     })}>
                 Add Random Item
             </button>
+
+            
+            {gameMode === "combat" && (
+                <button onClick={() => setGameMode("home")}>
+                    Leave Combat
+                </button>
+            )}
+
 
             
 

@@ -3,8 +3,11 @@ import { PlayerHUD } from "../Panels/PlayerHUD";
 import { ActionBar } from "../Panels/ActionBar";
 import { EnemyPanel } from "../Panels/EnemyPanel";
 import { InventoryPanel } from "../Panels/InventoryPanel";
+import { useGame } from "../../Lesson 6/GameContext";
+import { HomePanel } from "../Panels/HomePanel";
 
 export function GameLayout() {
+    const { gameMode } = useGame();
     return (
         <div className={styles.layout}>
 
@@ -18,7 +21,8 @@ export function GameLayout() {
                 
                 {/* LEFT: Main gameplay area */}
                 <div className={styles.center}>
-                    <EnemyPanel />
+                    {gameMode === "home" && <HomePanel />}
+                    {gameMode === "combat" && <EnemyPanel />}
                 </div>
 
                 {/* RIGHT: Inventory sidebar */}

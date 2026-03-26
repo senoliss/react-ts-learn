@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useHealthSystem } from "../Lesson 7/GameLogic/useHealthSystem";
 import { useManaSystem } from "../Lesson 7/GameLogic/useManaSystem";
 import { useScoreSystem } from "../Lesson 7/GameLogic/useScoreSystem";
@@ -18,9 +18,12 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const xpSystem = useXPSystem();
     const scoreSystem = useScoreSystem();
     const inventorySystem = useInventorySystem();
-    const enemySystem = useEnemySystem(healthSystem.takeDamage);
+    const [gameMode, setGameMode] = useState<"home" | "combat">("home");
+    const enemySystem = useEnemySystem(healthSystem.takeDamage, healthSystem.health, gameMode);
 
     const value = {
+        gameMode,
+        setGameMode,
         ...healthSystem,
         ...manaSystem,
         ...xpSystem,

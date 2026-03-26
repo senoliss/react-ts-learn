@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ENEMIES } from "./enemies";
 
-export function useEnemySystem(takeDamageFromEnemy: (amount: number) => void) {
+export function useEnemySystem(takeDamageFromEnemy: (amount: number) => void, playerHealth: number, gameMode: "home" | "combat") {
     const [enemy, setEnemy] = useState(() => generateEnemy());
     const [log, setLog] = useState<string[]>([]);
 
@@ -28,12 +28,18 @@ export function useEnemySystem(takeDamageFromEnemy: (amount: number) => void) {
     };
 
     const addLog = (message: string) => {
-        setLog(prev => [message, ...prev].slice(0, 20));
+        const timestamp = new Date().toLocaleTimeString();
+        setLog(prev => [`${timestamp} ${message}`, ...prev].slice(0, 200));
+        console.log(`${timestamp} ${message}`);
     };
 
     // ✅ Enemy auto-attack
     useEffect(() => {
+        if (gameMode !== "combat") return;
+        if (playerHealth <= 0) return;
+
         const interval = setInterval(() => {
+
             const dmg =
                 enemy.damageMin +
                 Math.floor(Math.random() * (enemy.damageMax - enemy.damageMin + 1));
@@ -47,7 +53,7 @@ export function useEnemySystem(takeDamageFromEnemy: (amount: number) => void) {
         }, enemy.attackSpeed);
 
         return () => clearInterval(interval);
-    }, [enemy, takeDamageFromEnemy]);
+    }, [enemy, gameMode, playerHealth, takeDamageFromEnemy]);
 
     return {
         enemy,
