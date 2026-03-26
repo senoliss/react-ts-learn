@@ -19,7 +19,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const scoreSystem = useScoreSystem();
     const inventorySystem = useInventorySystem();
     const [gameMode, setGameMode] = useState<"home" | "combat">("home");
-    const enemySystem = useEnemySystem(healthSystem.takeDamage, healthSystem.health, gameMode);
+    const enemySystem = useEnemySystem(healthSystem.takeDamage, healthSystem.health, gameMode, xpSystem.gainXP, inventorySystem.addItem);
 
     const value = {
         gameMode,

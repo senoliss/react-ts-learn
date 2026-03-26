@@ -1,4 +1,7 @@
+import type { LootRarity } from "./lootTypes";
+
 export type Item = {
+    rarity: LootRarity;
     id: string;
     name: string;
     icon?: string;       // optional icon path

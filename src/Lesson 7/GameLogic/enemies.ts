@@ -1,19 +1,83 @@
-export const ENEMIES = [
+import type { LootRarity } from "./lootTypes";
+
+export type EnemyTemplate = {
+    name: string;
+    maxHP: number;
+    attackStyle: string;
+    damageMin: number;
+    damageMax: number;
+    attackSpeed: number;
+    flavor: string[];
+    xpReward: number;
+
+    lootTable: {
+        rarity: LootRarity;
+        items: {
+            name: string;
+            icon: string;
+            amount: number;
+        }[];
+        weight: number;
+    }[];
+};
+
+export const ENEMIES: EnemyTemplate[] = [
+    // ---------------------------------------------------------
+    // GOBLIN
+    // ---------------------------------------------------------
     {
         name: "Goblin",
+        maxHP: 50,
         attackStyle: "slashes",
         damageMin: 2,
         damageMax: 5,
         attackSpeed: 1800,
         flavor: [
-            "Goblin snarls and leaps at you!",
-            "Goblin swings wildly!",
+            "Goblin snarls and leaps!",
+            "Goblin swings its dagger!",
             "Goblin lunges forward!"
         ],
-        maxHP: 40
+        xpReward: 12,
+
+        lootTable: [
+            {
+                rarity: "common",
+                weight: 70,
+                items: [
+                    { name: "Bone", icon: "🦴", amount: 1 },
+                    { name: "Cloth Scrap", icon: "🧵", amount: 1 }
+                ]
+            },
+            {
+                rarity: "uncommon",
+                weight: 20,
+                items: [
+                    { name: "Minor Health Potion", icon: "🧪", amount: 1 }
+                ]
+            },
+            {
+                rarity: "rare",
+                weight: 8,
+                items: [
+                    { name: "Goblin Ear", icon: "👂", amount: 1 }
+                ]
+            },
+            {
+                rarity: "epic",
+                weight: 2,
+                items: [
+                    { name: "Goblin's Lucky Charm", icon: "🍀", amount: 1 }
+                ]
+            }
+        ]
     },
+
+    // ---------------------------------------------------------
+    // SKELETON
+    // ---------------------------------------------------------
     {
         name: "Skeleton",
+        maxHP: 60,
         attackStyle: "strikes",
         damageMin: 3,
         damageMax: 7,
@@ -23,10 +87,47 @@ export const ENEMIES = [
             "Skeleton swings a rusted blade!",
             "A hollow thud echoes as Skeleton strikes!"
         ],
-        maxHP: 60
+        xpReward: 18,
+
+        lootTable: [
+            {
+                rarity: "common",
+                weight: 65,
+                items: [
+                    { name: "Bone Fragment", icon: "🦴", amount: 1 },
+                    { name: "Rusty Nail", icon: "🪛", amount: 1 }
+                ]
+            },
+            {
+                rarity: "uncommon",
+                weight: 22,
+                items: [
+                    { name: "Cracked Skull", icon: "💀", amount: 1 }
+                ]
+            },
+            {
+                rarity: "rare",
+                weight: 10,
+                items: [
+                    { name: "Ancient Ring", icon: "💍", amount: 1 }
+                ]
+            },
+            {
+                rarity: "epic",
+                weight: 3,
+                items: [
+                    { name: "Cursed Bone Charm", icon: "☠️", amount: 1 }
+                ]
+            }
+        ]
     },
+
+    // ---------------------------------------------------------
+    // WOLF
+    // ---------------------------------------------------------
     {
         name: "Wolf",
+        maxHP: 35,
         attackStyle: "bites",
         damageMin: 1,
         damageMax: 6,
@@ -36,10 +137,46 @@ export const ENEMIES = [
             "Wolf growls and lunges!",
             "Wolf snaps its jaws!"
         ],
-        maxHP: 35
+        xpReward: 10,
+
+        lootTable: [
+            {
+                rarity: "common",
+                weight: 70,
+                items: [
+                    { name: "Wolf Fur", icon: "🐺", amount: 1 }
+                ]
+            },
+            {
+                rarity: "uncommon",
+                weight: 22,
+                items: [
+                    { name: "Sharp Fang", icon: "🦷", amount: 1 }
+                ]
+            },
+            {
+                rarity: "rare",
+                weight: 7,
+                items: [
+                    { name: "Wolf Pelt", icon: "🧥", amount: 1 }
+                ]
+            },
+            {
+                rarity: "epic",
+                weight: 1,
+                items: [
+                    { name: "Moon-Blessed Fang", icon: "🌙", amount: 1 }
+                ]
+            }
+        ]
     },
+
+    // ---------------------------------------------------------
+    // BANDIT
+    // ---------------------------------------------------------
     {
         name: "Bandit",
+        maxHP: 35,
         attackStyle: "slashes",
         damageMin: 2,
         damageMax: 8,
@@ -49,10 +186,47 @@ export const ENEMIES = [
             "Bandit lunges forward!",
             "Bandit slashes at you!"
         ],
-        maxHP: 35
+        xpReward: 14,
+
+        lootTable: [
+            {
+                rarity: "common",
+                weight: 60,
+                items: [
+                    { name: "Coin Purse", icon: "🪙", amount: 3 },
+                    { name: "Dirty Cloth", icon: "🧻", amount: 1 }
+                ]
+            },
+            {
+                rarity: "uncommon",
+                weight: 25,
+                items: [
+                    { name: "Lockpick", icon: "🗝️", amount: 1 }
+                ]
+            },
+            {
+                rarity: "rare",
+                weight: 12,
+                items: [
+                    { name: "Bandit's Dagger", icon: "🗡️", amount: 1 }
+                ]
+            },
+            {
+                rarity: "epic",
+                weight: 3,
+                items: [
+                    { name: "Shadow Hood", icon: "🕶️", amount: 1 }
+                ]
+            }
+        ]
     },
+
+    // ---------------------------------------------------------
+    // IMP
+    // ---------------------------------------------------------
     {
         name: "Imp",
+        maxHP: 30,
         attackStyle: "scratches",
         damageMin: 1,
         damageMax: 3,
@@ -62,6 +236,37 @@ export const ENEMIES = [
             "Imp screeches and lunges!",
             "Imp snaps its jaws!"
         ],
-        maxHP: 35
+        xpReward: 8,
+
+        lootTable: [
+            {
+                rarity: "common",
+                weight: 72,
+                items: [
+                    { name: "Imp Dust", icon: "✨", amount: 1 }
+                ]
+            },
+            {
+                rarity: "uncommon",
+                weight: 20,
+                items: [
+                    { name: "Cracked Imp Horn", icon: "🩸", amount: 1 }
+                ]
+            },
+            {
+                rarity: "rare",
+                weight: 6,
+                items: [
+                    { name: "Fire Essence", icon: "🔥", amount: 1 }
+                ]
+            },
+            {
+                rarity: "epic",
+                weight: 2,
+                items: [
+                    { name: "Impwing Amulet", icon: "🧿", amount: 1 }
+                ]
+            }
+        ]
     }
 ];

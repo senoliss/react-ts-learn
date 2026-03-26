@@ -4,16 +4,21 @@ import { useGame } from "../../Lesson 6/GameContext";
 export function ActionBar() {
     const { takeDamage, heal, castSpell, regenMana, gainXP } = useGame();
     const {addItem} = useGame();
-    const { playerAttack } = useGame();
+    const { health, playerAttack } = useGame();
     const { gameMode, setGameMode } = useGame();
+    
 
     return (
         <div className={styles.actions}>
             
-            <button onClick={() => playerAttack(10)}>
+            <button disabled={health <= 0}
+                    onClick={() => playerAttack(10)}>
                 Attack Enemy (-10 HP)
             </button>
-            <button onClick={() => castSpell(15)}>Cast Spell (-15 Mana)</button>
+            <button onClick={() => castSpell(15)}
+                    disabled={health <= 0}>
+                Cast Spell (-15 Mana)
+            </button>
             <button onClick={() => heal(10)}>Heal (+10 HP)</button>
             <button onClick={() => regenMana(10)}>Meditate (+10 Mana)</button>
             <button onClick={() => gainXP(25)}>Gain XPs (+25)</button>
@@ -42,7 +47,11 @@ export function ActionBar() {
 
             
             {gameMode === "combat" && (
-                <button onClick={() => setGameMode("home")}>
+                <button onClick={() => setGameMode("home")} style={{ 
+                    backgroundColor: "rgba(112, 42, 42, 0.5)",
+                    border: "1px solid rgb(255, 132, 132)",
+                    color: "rgb(252, 132, 132)"
+                    }} >
                     Leave Combat
                 </button>
             )}

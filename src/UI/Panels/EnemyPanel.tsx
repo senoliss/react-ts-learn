@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useGame } from "../../Lesson 6/GameContext";
 
 export function EnemyPanel() {
-    const { enemy, log } = useGame();
+    const { enemy, log, health } = useGame();
     const [showLog, setShowLog] = useState(false);
     
 
@@ -10,6 +10,13 @@ export function EnemyPanel() {
 
     return (
         <div style={{ width: "350px", textAlign: "center" }}>
+              
+            {health <= 0 &&
+                <p style={{ color: "red", fontWeight: "bold", marginBottom: "20px" }}>
+                    Heal before fighting again.
+                </p>
+            }
+
             <h2>{enemy.name}</h2>
             <p>HP: {enemy.hp} / {enemy.maxHP}</p>
             <p>Attack Style: {enemy.attackStyle}</p>
@@ -61,11 +68,15 @@ export function EnemyPanel() {
                     }}
                 >
                     {log.length === 0 && <p>No recent actions...</p>}
+                    
                     {log.map((entry: string, i: number) => (
-                        <div key={i} style={{ marginBottom: "4px" }}>
-                            {entry}
-                        </div>
+                        <div 
+                            key={i} 
+                            style={{ marginBottom: "4px" }} 
+                            dangerouslySetInnerHTML={{ __html: entry }}
+                        />
                     ))}
+
                 </div>
             )}
         </div>

@@ -1,4 +1,5 @@
 import { useGame } from "../../Lesson 6/GameContext";
+import { RARITY_COLORS } from "../../Lesson 7/GameLogic/lootTypes";
 import type { Item } from "../../Lesson 7/GameLogic/types";
 import styles from "./InventoryPanel.module.css";
 
@@ -17,7 +18,11 @@ export function InventoryPanel() {
                 {inventory.map((item: Item) => (
                     <div key={item.id} className={styles.itemCard}>
                         <div className={styles.icon}>{item.icon ?? "📦"}</div>
-                        <div className={styles.name}>{item.name}</div>
+                        <div className={styles.name}>
+                            <span style={{ color: RARITY_COLORS[item.rarity], fontWeight: "bold" }}>
+                            {item.name}
+                            </span>
+                        </div>
                         <div className={styles.amount}>x{item.amount}</div>
 
                         <div className={styles.buttons}>
