@@ -1,0 +1,57 @@
+.inventory {
+    padding: 20px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.itemCard {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon {
+    font-size: 30px;
+}
+
+.name {
+    margin-top: 6px;
+    font-weight: bold;
+}
+
+.amount {
+    color: #aaa;
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.buttons button {
+    padding: 4px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.drop {
+    background: #522;
+    color: white;
+}
+
+.empty {
+    color: #aaa;
+}
