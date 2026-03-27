@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { InventoryPanel } from "./InventoryPanel";
 import { SpellPanel } from "./SpellPanel";
+import { QuestPanel } from "./QuestPanel";
+import { SkillPanel } from "./SkillPanel";
 
 export function SidebarTabs() {
-    const [tab, setTab] = useState<"inventory" | "spells">("inventory");
+    const [tab, setTab] = useState<"inventory" | "spells" | "skills" | "quests">("inventory");
 
     return (
         <div>
@@ -13,13 +15,23 @@ export function SidebarTabs() {
                 </button>
 
                 <button onClick={() => setTab("spells")}>
-                    Spells
+                    Spellbook
+                </button>
+
+                <button onClick={() => setTab("skills")}>
+                    Skills
+                </button>
+
+                <button onClick={() => setTab("quests")}>
+                    Quests
                 </button>
             </div>
 
             {/* Tab content */}
             {tab === "inventory" && <InventoryPanel />}
             {tab === "spells" && <SpellPanel />}
+            {tab === "skills" && <SkillPanel />}
+            {tab === "quests" && <QuestPanel />}
         </div>
     );
 }

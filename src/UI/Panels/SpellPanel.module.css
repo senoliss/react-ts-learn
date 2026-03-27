@@ -49,5 +49,5 @@ button {
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
-    width: 100%;
+    /* width: 100%; */ /*marks all (action bar/enemy panel and etc) the buttons to be the same width, but it looks weird when the text is short. */
 }
