@@ -119,3 +119,83 @@ Important rules for your teaching:
 - Help me gradually build a real game using React + TypeScript.
 
 Start now by asking me to paste my ManaBar.tsx solution (if I have one), or guide me to create it from scratch.
+
+
+
+
+    PROMPT TO CONTINUE MY REACT RPG PROJECT 2026-03-27
+
+I’m continuing a long‑form learning project where I’m building a modular RPG game in React + TypeScript.
+I already have the following architecture, all working:
+✅ Core Systems (custom hooks)
+
+useHealthSystem() — health, takeDamage, heal
+useManaSystem() — mana, setMana, regenMana
+useScoreSystem() — score, addScore
+useXPSystem() — xp, level, xp gain, level system (works)
+useInventorySystem() — inventory items, rarity, add/remove/use
+useEnemySystem() — real‑time combat; enemy auto-attacks player; weighted loot drops; XP rewards; combat log
+useSpellSystem() — spells with mana cost, cooldowns, damage, healing; spellbook UI panel
+
+✅ Game State
+All systems are combined inside GameContext using a global store architecture.
+Game modes implemented:
+
+"home" (safe area, no combat)
+"combat" (enemy auto-attacks)
+
+✅ UI Panels
+
+Player HUD (health, mana, xp, score)
+EnemyPanel (HP bar, auto-attack log, enemy info)
+ActionBar (basic combat actions)
+SidebarTabs (Inventory + Spells)
+InventoryPanel (RuneScape-style grid with color rarity)
+SpellPanel (spell cards, cooldowns, cast logic)
+HomePanel (safe zone before entering combat)
+
+✅ Important Fixes Already Implemented
+
+Enemy auto-attack interval is stable (dependency array fixed)
+Player cannot attack or cast spells at 0 HP
+Enemy stops attacking when player HP ≤ 0
+Weighted loot drops working
+Rarity colors via RARITY_COLORS
+Mana correctly reduces when casting spells
+No unnecessary effect dependencies
+
+✅ What I Want to Continue Working On
+We are just about to start the Level‑Up Rewards System.
+Before we stopped, I chose Option B / C (depending on the assistant):
+I want a level-up reward system where leveling up gives benefits such as:
+
+Increased max HP or mana
+Improved stats
+Unlocks new spells
+Possible choice of upgrade (like RuneScape style point allocation)
+
+You should continue teaching me step-by-step how to implement Level-Up Rewards, in the same style as before:
+
+clear explanations
+clean architecture
+incremental coding
+no breaking changes
+maintainability
+best practices
+TypeScript-friendly
+
+Please start by summarizing my progress again, verifying that nothing is missing, then guide me into adding the Level-Up Rewards system.
+
+✅ Optional: You Can Add This Line
+(If you want Copilot to behave the same teaching style as today)
+Use a step-by-step teaching style, explain everything clearly, and avoid large refactors unless absolutely necessary. Treat this as an ongoing course.
+
+
+✅ You're Ready for Tomorrow ✅
+Just paste the full prompt above, and the next Copilot will pick up exactly where we stopped today — with Level-Up Rewards, Equipment, Stats, and further RPG mechanics.
+If you want, I can also generate:
+✅ a README.md summarizing your whole project
+✅ a full architecture diagram
+✅ a refactor-safe folder structure
+✅ or onboarding instructions for teammates
+Just tell me!
