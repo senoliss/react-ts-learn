@@ -3,6 +3,7 @@ import { InventoryPanel } from "./InventoryPanel";
 import { SpellPanel } from "./SpellPanel";
 import { QuestPanel } from "./QuestPanel";
 import { SkillPanel } from "./SkillPanel";
+import { Tooltip } from "react-tooltip";
 
 export function SidebarTabs() {
     const [tab, setTab] = useState<"inventory" | "spells" | "skills" | "quests">("inventory");
@@ -29,7 +30,7 @@ export function SidebarTabs() {
 
             {/* Tab content */}
             {tab === "inventory" && <InventoryPanel />}
-            {tab === "spells" && <SpellPanel />}
+            {tab === "spells" && <> <SpellPanel /> <Tooltip id="my-tooltip" /> </>}
             {tab === "skills" && <SkillPanel />}
             {tab === "quests" && <QuestPanel />}
         </div>

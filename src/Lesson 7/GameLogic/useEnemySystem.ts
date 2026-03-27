@@ -127,7 +127,7 @@ export function useEnemySystem(takeDamageFromEnemy: (
         }, enemy.attackSpeed);
 
         return () => clearInterval(interval);
-    }, [enemy, gameMode, playerHealth, takeDamageFromEnemy]);
+    }, [enemy.attackSpeed, gameMode, playerHealth]);
 
     return {
         enemy,

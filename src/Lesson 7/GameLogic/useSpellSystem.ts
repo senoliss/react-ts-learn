@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { SPELLS, type Spell } from "./spells";
+import { useGame } from "../../Lesson 6/GameContext";
 
 
 export function useSpellSystem(
@@ -76,6 +77,6 @@ export function useSpellSystem(
         return {
             spells: SPELLS,
             castSpell,
-            cooldowns
+            cooldowns,
         };
 }

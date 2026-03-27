@@ -1,5 +1,6 @@
 import styles from "./SpellPanel.module.css";
 import { useGame } from "../../Lesson 6/GameContext";
+import { Tooltip } from 'react-tooltip'
 
 export function SpellPanel() {
     const { spells, cooldowns, castSpell, mana, health, gameMode } = useGame();
@@ -20,9 +21,17 @@ export function SpellPanel() {
                     return (
                         <div key={spell.id} className={styles.card}>
                             
-                            <div className={styles.icon}>{spell.icon}</div>
+                            <div className={styles.icon}>
+                                <a
+                                    data-tooltip-id="my-tooltip"
+                                    data-tooltip-content={`${spell.name}: ${spell.description} (Mana Cost: ${spell.manaCost})`}
+                                    data-tooltip-place="top"
+                                >
+                                    {spell.icon}
+                                    </a>
+                            </div>
 
-                            <div className={styles.name}>{spell.name}</div>
+                            {/* <div className={styles.name}>{spell.name}</div> */}
 
                             <div className={styles.cost}>
                                 Mana: {spell.manaCost}
@@ -34,9 +43,9 @@ export function SpellPanel() {
                                 </div>
                             )}
 
-                            <div className={styles.desc}>
+                            {/* <div className={styles.desc}>
                                 {spell.description}
-                            </div>
+                            </div> */}
 
                             <button
                                 disabled={!canCast}

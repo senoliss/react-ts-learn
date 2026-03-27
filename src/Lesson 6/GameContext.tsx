@@ -28,7 +28,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         inventorySystem.addItem);
     const spellSystem = useSpellSystem(
         manaSystem.mana, 
-        manaSystem.regenMana, 
+        manaSystem.setMana, 
         healthSystem.health, 
         healthSystem.heal, 
         enemySystem.playerAttack, 
