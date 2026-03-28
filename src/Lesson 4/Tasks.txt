@@ -199,3 +199,47 @@ If you want, I can also generate:
 ✅ a refactor-safe folder structure
 ✅ or onboarding instructions for teammates
 Just tell me!
+
+
+
+PROMPT TO CONTINUE MY REACT RPG PROJECT 2026-03-28
+
+I am continuing an RPG project in React + TypeScript.
+
+IMPORTANT: Do NOT rewrite my architecture or make systems depend on each other internally.
+Keep hooks independent, and put all composition wiring only in GameContext.
+
+✅ Current systems:
+- useHealthSystem(): holds ONLY current health and heal(amount)
+- useManaSystem(): holds ONLY current mana and regen/spend
+- useStatsSystem(): owns maxHP, maxMana, damage and auto-scaling on level-up
+- useXPSystem(): detects level-ups, increases pendingLevelUps, calls applyAutoLevelScaling()
+- useEnemySystem(), useSpellSystem(), useInventorySystem(), etc.
+
+✅ What I need fixed:
+Healing should go up to the real maxHP stored in StatsSystem, NOT stay capped at 100.
+
+✅ Requirements for the fix:
+1. DO NOT put useGame() inside any game logic hook. (It causes invalid hook calls.)
+2. DO NOT add maxHP parameters to heal(amount).
+3. DO NOT pass maxHP into useHealthSystem as an argument.
+4. HealthSystem must remain independent: it only stores `health`.
+5. StatsSystem remains the single source of truth for maxHP.
+6. HealthBar reads both:
+   - health (from HealthSystem)
+   - maxHP (from StatsSystem)
+7. The clamping of health must happen in the UI layer (HealthBar or GameContext), NOT inside the hook.
+
+✅ What I want from you:
+1. Fix healing so it correctly caps at the dynamic maxHP from StatsSystem.
+2. Show me the corrected minimal versions of:
+   - useHealthSystem
+   - GameContext (only the part that wires healing)
+   - HealthBar
+3. DO NOT modify/use dependency injection.
+4. DO NOT rewrite other systems.
+5. Explain the fix in simple terms (short).
+6. After fixing healing/maxHP, continue teaching me the Level-Up Reward Panel system (Option 2: skill-point spending).
+7. Keep explanations clear, short, and structured.
+
+Begin now.
