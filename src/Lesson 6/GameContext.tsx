@@ -6,6 +6,7 @@ import { useXPSystem } from "../Lesson 7/GameLogic/useXPSystem";
 import { useInventorySystem } from "../Lesson 7/GameLogic/useInventorySystem";
 import { useEnemySystem } from "../Lesson 7/GameLogic/useEnemySystem";
 import { useSpellSystem } from "../Lesson 7/GameLogic/useSpellSystem";
+import { useStatsSystem } from "../Lesson 7/GameLogic/useStatsSystem";
 
 // 4. Create the context with a default value (can be empty or have default functions)
 export const GameContext = createContext<any>(undefined);
@@ -14,9 +15,10 @@ export const GameContext = createContext<any>(undefined);
 export function GameProvider({ children }: { children: React.ReactNode }) {
 
     // --- shared game state ---
+    const stats = useStatsSystem();
     const healthSystem = useHealthSystem();
     const manaSystem = useManaSystem();
-    const xpSystem = useXPSystem();
+    const xpSystem = useXPSystem(stats.applyAutoLevelScaling);
     const scoreSystem = useScoreSystem();
     const inventorySystem = useInventorySystem();
     const [gameMode, setGameMode] = useState<"home" | "combat">("home");
@@ -44,7 +46,8 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         ...scoreSystem,
         ...inventorySystem,
         ...enemySystem,
-        ...spellSystem
+        ...spellSystem,
+        ...stats
     };
 
     // --- Provide state and actions to children ---

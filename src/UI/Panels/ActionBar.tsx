@@ -21,7 +21,7 @@ export function ActionBar() {
             </button>
             <button onClick={() => heal(10)}>Heal (+10 HP)</button>
             <button onClick={() => regenMana(10)}>Meditate (+10 Mana)</button>
-            <button onClick={() => gainXP(25)}>Gain XPs (+25)</button>
+            <button onClick={() => gainXP(100)}>Gain XPs (+25)</button>
             
             <button onClick={() => addItem({
                     id: crypto.randomUUID(),
@@ -29,6 +29,7 @@ export function ActionBar() {
                     amount: 1,
                     icon: "🧪",
                     type: "consumable",
+                    description: "Restores 25 HP when used.",
                     effect: () => heal(25)
                     })}>
                 Add Health Potion

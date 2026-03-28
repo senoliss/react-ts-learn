@@ -29,8 +29,8 @@ export function SidebarTabs() {
             </div>
 
             {/* Tab content */}
-            {tab === "inventory" && <InventoryPanel />}
-            {tab === "spells" && <> <SpellPanel /> <Tooltip id="my-tooltip" /> </>}
+            {tab === "inventory" && <> <InventoryPanel /> <Tooltip id="item-tooltip" /> </>}
+            {tab === "spells" && <> <SpellPanel /> <Tooltip id="spell-tooltip" /> </>}
             {tab === "skills" && <SkillPanel />}
             {tab === "quests" && <QuestPanel />}
         </div>

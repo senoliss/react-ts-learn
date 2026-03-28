@@ -2,7 +2,6 @@ import styles from "./GameLayout.module.css";
 import { PlayerHUD } from "../Panels/PlayerHUD";
 import { ActionBar } from "../Panels/ActionBar";
 import { EnemyPanel } from "../Panels/EnemyPanel";
-import { InventoryPanel } from "../Panels/InventoryPanel";
 import { useGame } from "../../Lesson 6/GameContext";
 import { HomePanel } from "../Panels/HomePanel";
 import { SidebarTabs } from "../Panels/SidebarTabs";
@@ -10,6 +9,8 @@ import { SidebarTabs } from "../Panels/SidebarTabs";
 export function GameLayout() {
     const { gameMode } = useGame();
     return (
+
+        // Need to implement here some kind of layout with css grid or flexbox to arrange the panels in a nice way.
         <div className={styles.layout}>
 
             {/* TOP HUD */}

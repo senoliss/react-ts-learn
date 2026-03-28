@@ -1,5 +1,6 @@
 import type { LootRarity } from "./lootTypes";
 
+
 export type EnemyTemplate = {
     name: string;
     maxHP: number;
@@ -16,6 +17,8 @@ export type EnemyTemplate = {
             name: string;
             icon: string;
             amount: number;
+            type?: string;
+            effect?: () => void;
         }[];
         weight: number;
     }[];
@@ -52,7 +55,7 @@ export const ENEMIES: EnemyTemplate[] = [
                 rarity: "uncommon",
                 weight: 20,
                 items: [
-                    { name: "Minor Health Potion", icon: "🧪", amount: 1 }
+                    { name: "Lesser Health Potion", icon: "🧪", amount: 1, type: "consumable" } // need to add healing effect but idk should i do it here or in other place, because then need to import healing function from healt system
                 ]
             },
             {

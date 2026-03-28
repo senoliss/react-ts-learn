@@ -23,7 +23,7 @@ export function SpellPanel() {
                             
                             <div className={styles.icon}>
                                 <a
-                                    data-tooltip-id="my-tooltip"
+                                    data-tooltip-id="spell-tooltip"
                                     data-tooltip-content={`${spell.name}: ${spell.description} (Mana cost: ${spell.manaCost})`}
                                     data-tooltip-place="top"
                                 >

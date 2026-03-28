@@ -17,12 +17,19 @@ export function InventoryPanel() {
 
                 {inventory.map((item: Item) => (
                     <div key={item.id} className={styles.itemCard}>
-                        <div className={styles.icon}>{item.icon ?? "📦"}</div>
-                        <div className={styles.name}>
+                        <div className={styles.icon}>
+                                <a data-tooltip-id="item-tooltip"
+                                    data-tooltip-content={`${item.name} ${item.description || "-"}`}
+                                    data-tooltip-place="top"
+                                >
+                                    {item.icon ?? "📦"}
+                                </a>
+                            </div>
+                        {/* <div className={styles.name}>
                             <span style={{ color: RARITY_COLORS[item.rarity], fontWeight: "bold" }}>
                             {item.name}
                             </span>
-                        </div>
+                        </div> */}
                         <div className={styles.amount}>x{item.amount}</div>
 
                         <div className={styles.buttons}>

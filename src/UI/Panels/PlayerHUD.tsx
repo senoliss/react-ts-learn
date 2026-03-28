@@ -10,7 +10,7 @@ export function PlayerHUD() {
             <HealthBar />
             <ManaBar />
             <XPBar />
-            <Score />
+            {/* <Score /> */}
         </div>
     );
 }

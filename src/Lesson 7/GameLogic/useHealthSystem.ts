@@ -1,13 +1,15 @@
 import {useState} from 'react';
+import { useGame } from "../../Lesson 6/GameContext";
+
 
 export function useHealthSystem() {
     const [health, setHealth] = useState<number>(100);
 
-    const takeDamage = (amount: number) => 
+    const takeDamage = (amount: number) =>
         setHealth(h => Math.max(0, h - amount));
 
     const heal = (amount: number) =>
-        setHealth(h => Math.min(100, h + amount));
+        setHealth(h => Math.min(100, h + amount)); // leave 100 for a moment
 
     return {
         health,

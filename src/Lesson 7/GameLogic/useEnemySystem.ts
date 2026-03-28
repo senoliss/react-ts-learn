@@ -35,7 +35,7 @@ export function useEnemySystem(takeDamageFromEnemy: (
             name: loot.name,
             icon: loot.icon,
             amount: loot.amount,
-            type: "material",
+            type: loot.type || "material",
             rarity: loot.rarity
         });
         
@@ -104,7 +104,7 @@ export function useEnemySystem(takeDamageFromEnemy: (
     }
 
 
-    // ✅ Enemy auto-attack STOPPED WORKING
+    // ✅ Enemy auto-attack
     useEffect(() => {
         if (gameMode !== "combat") return;
         if (playerHealth <= 0) {

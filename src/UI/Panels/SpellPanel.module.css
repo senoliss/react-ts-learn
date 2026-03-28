@@ -4,7 +4,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    grid-template-columns: repeat(3, 1fr); /* 4 cards per row */
     gap: 12px;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .icon {
-    font-size: 30px;
+    font-size: 32px;
     margin-bottom: 5px;
 }
 
