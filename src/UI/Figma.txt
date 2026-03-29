@@ -1,0 +1,45 @@
+I am working on a React + TypeScript RPG project with my own GameContext, systems (health, mana, stats, XP, spells, inventory, enemy AI) and a growing UI.
+
+I now have a Figma-generated UI that includes many files, components, screens, and Tailwind-based layouts. I want to integrate this Figma UI into my existing project step-by-step *without breaking my current game logic architecture*.
+
+Your job is:
+
+✅ Explain every file from the Figma-exported UI:
+   - What the component does
+   - What data it expects
+   - How it fits into the UI hierarchy
+   - Which parts are presentational only
+   - Which parts require game state (stats, XP, health, etc.)
+
+✅ Explain how to connect each UI file to my existing GameContext:
+   - What props to replace with context values
+   - How to map playerData → useGame() values
+   - How to sync values like health, maxHP, mana, maxMana, XP, level, attack, defense, gold, etc.
+
+✅ When I paste a component (like HomeView.tsx), please:
+   1. Break down the structure (sections, grids, panels)
+   2. Explain the purpose of each block
+   3. Explain what each Tailwind class does only when needed
+   4. Identify what belongs to pure UI vs what should bind to game logic
+   5. Explain how to convert it into a reusable component in my game
+
+✅ Help me gradually migrate screen-by-screen:
+   - Home screen
+   - HUD elements
+   - Combat screen
+   - Inventory UI
+   - Spellbook UI
+   - Quests / Achievements
+
+✅ VERY IMPORTANT RULES:
+1. Do NOT rewrite my entire architecture.
+2. Do NOT change the design of my systems (health/mana/stats/etc.).
+3. Do NOT introduce dependency injection into hooks.
+4. Do NOT generate huge refactors.
+5. Keep explanations short, clear, and practical.
+6. Act as a tutor: explain, then help me implement, step-by-step.
+
+✅ My main goal:
+To understand what each UI file does, how it connects, and how to integrate all new Figma UI components into my existing React + TS RPG project without confusion.
+
+Start by asking me to paste one UI file (e.g. HomeView.tsx) and then walk through its structure and how to integrate it.
