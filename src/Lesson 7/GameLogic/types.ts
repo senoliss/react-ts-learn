@@ -9,25 +9,40 @@ export type Item = {
     amount: number;      // stackable count
     description?: string;
     effect?: () => void; // optional on-use effect
+
+  // Figma UI expects these:
+    slot?: "helmet" | "chest" | "legs" | "boots" | "gloves" |
+          "ring1" | "ring2" | "amulet" | "cape" | "pet" |
+          "wings" | "weapon" | "offhand";
+
+    stats?: {
+      attack?: number;
+      defense?: number;
+      health?: number;
+      mana?: number;
+    };
+
+    lore?: string;
+
 };
 
 
-export interface Item1 {
-  id: string;
-  name: string;
-  type: 'weapon' | 'armor' | 'consumable' | 'material' | 'quest';
-  slot?: 'helmet' | 'chest' | 'legs' | 'boots' | 'gloves' | 'ring1' | 'ring2' | 'amulet' | 'cape' | 'pet' | 'wings' | 'weapon' | 'offhand';
-  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
-  icon: string;
-  stats?: {
-    attack?: number;
-    defense?: number;
-    health?: number;
-    mana?: number;
-  };
-  description: string;
-  lore?: string;
-}
+// export interface Item1 {
+//   id: string;
+//   name: string;
+//   type: 'weapon' | 'armor' | 'consumable' | 'material' | 'quest';
+//   slot?: 'helmet' | 'chest' | 'legs' | 'boots' | 'gloves' | 'ring1' | 'ring2' | 'amulet' | 'cape' | 'pet' | 'wings' | 'weapon' | 'offhand';
+//   rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+//   icon: string;
+//   stats?: {
+//     attack?: number;
+//     defense?: number;
+//     health?: number;
+//     mana?: number;
+//   };
+//   description: string;
+//   lore?: string;
+// }
 
 export interface Skill {
   id: string;

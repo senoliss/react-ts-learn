@@ -8,6 +8,7 @@ import { SidebarTabs } from "../Panels/SidebarTabs";
 import { LeftNavbar } from "../Panels/LeftNavbar";
 import { HomeView } from "../Panels/HomeViewPanel";
 import type { PlayerData } from "../../Lesson 7/GameLogic/types";
+import { RightSidebar } from "../Panels/RightSidebar";
 
 export function GameLayout() {
     const { gameMode } = useGame();
@@ -40,12 +41,12 @@ export function GameLayout() {
                     {gameMode === "combat" && <EnemyPanel />}
                 </div>
 
-                {/* RIGHT SIDEBAR */}
-                <aside className={styles.sidebar}>
-                    <SidebarTabs />
-                </aside>
 
             </div>
+                {/* RIGHT SIDEBAR */}
+                <aside className={styles.sidebar}>
+                    <RightSidebar />
+                </aside>
 
             {/* ACTION BAR */}
             <div className={styles.actions}>

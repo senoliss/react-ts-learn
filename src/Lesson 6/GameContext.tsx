@@ -7,6 +7,7 @@ import { useInventorySystem } from "../Lesson 7/GameLogic/useInventorySystem";
 import { useEnemySystem } from "../Lesson 7/GameLogic/useEnemySystem";
 import { useSpellSystem } from "../Lesson 7/GameLogic/useSpellSystem";
 import { useStatsSystem } from "../Lesson 7/GameLogic/useStatsSystem";
+import { type Item, type Skill, type Quest, type Equipment } from "../Lesson 7/GameLogic/types";
 
 // 4. Create the context with a default value (can be empty or have default functions)
 export const GameContext = createContext<any>(undefined);
@@ -36,10 +37,21 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         enemySystem.playerAttack, 
         enemySystem.addLog
     );
+    const [selectedItem, setSelectedItem] = useState<Item | Skill | Quest | null>(null);
+    const [equipment, setEquipment] = useState<Equipment>({});
+    const [skills, setSkills] = useState<Skill[]>([]);
+    const [quests, setQuests] = useState<Quest[]>([]);
+
+    
 
     const value = {
         gameMode,
         setGameMode,
+        selectedItem,
+        setSelectedItem,
+        skills: [],
+        quests: [],
+        equipment: {},
         ...healthSystem,
         ...manaSystem,
         ...xpSystem,
@@ -47,7 +59,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         ...inventorySystem,
         ...enemySystem,
         ...spellSystem,
-        ...stats
+        ...stats,
     };
 
     // --- Provide state and actions to children ---
