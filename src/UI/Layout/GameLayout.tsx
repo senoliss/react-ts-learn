@@ -3,43 +3,50 @@ import { PlayerHUD } from "../Panels/PlayerHUD";
 import { ActionBar } from "../Panels/ActionBar";
 import { EnemyPanel } from "../Panels/EnemyPanel";
 import { useGame } from "../../Lesson 6/GameContext";
-import { HomePanel } from "../Panels/HomePanel";
+import { HomePanel } from "../HomePanel/HomePanel";
 import { SidebarTabs } from "../Panels/SidebarTabs";
+import { HomeView } from "../Panels/HomeViewPanel";
+import type { PlayerData } from "../../Lesson 7/GameLogic/types";
 
 export function GameLayout() {
     const { gameMode } = useGame();
     return (
 
         // Need to implement here some kind of layout with css grid or flexbox to arrange the panels in a nice way.
-        <div className={styles.layout}>
+        <>
+        {/* <HomeView playerData={{} as PlayerData} onNavigate={function (view: string): void {
+                throw new Error("Function not implemented.");
+            } } /> */}
+            <HomePanel />
+        </>
+        // <div className={styles.layout}>
 
-            {/* TOP HUD */}
-            <div className={styles.hud}>
-                <PlayerHUD />
-            </div>
+        //     {/* TOP HUD */}
+        //     <div className={styles.hud}>
+        //         <PlayerHUD />
+        //     </div>
 
-            {/* MIDDLE CONTENT AREA */}
-            <div className={styles.body}>
+        //     {/* MIDDLE CONTENT AREA */}
+        //     <div className={styles.body}>
                 
-                {/* LEFT: Main gameplay area */}
-                <div className={styles.center}>
-                    {gameMode === "home" && <HomePanel />}
-                    {gameMode === "combat" && <EnemyPanel />}
-                </div>
+        //         {/* LEFT: Main gameplay area */}
+        //         <div className={styles.center}>
+        //             {gameMode === "home" && <HomePanel />}
+        //             {gameMode === "combat" && <EnemyPanel />}
+        //         </div>
 
-                {/* RIGHT: Inventory sidebar */}
-                <aside className={styles.sidebar}>
-                    <SidebarTabs />
-                </aside>
+        //         {/* RIGHT: Inventory sidebar */}
+        //         <aside className={styles.sidebar}>
+        //             <SidebarTabs />
+        //         </aside>
 
-            </div>
+        //     </div>
 
-            {/* BOTTOM ACTION BAR */}
-            <div className={styles.actions}>
-                <ActionBar />
-            </div>
+        //     {/* BOTTOM ACTION BAR */}
+        //     <div className={styles.actions}>
+        //         <ActionBar />
+        //     </div>
 
-        </div>
+        // </div>
     );
 }
-``
