@@ -1,48 +1,41 @@
 .layout {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background: #1b1b1b;
-    color: white;
-    font-family: sans-serif;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 250px 1fr 300px;
+  height: 100vh;
+  background-color: #0f172a; /* slate-900 */
 }
 
-/* TOP HUD */
+/* Nav */
+.leftNav {
+  grid-row: 1 / span 3;
+  background-color: #1e293b;
+}
+
+/* HUD */
 .hud {
-    flex: 0 0 auto;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  grid-row: 1 / span 1;
+  grid-column: 2 / span 1;
+  padding: 1rem;
 }
 
-/* MIDDLE AREA – two columns: center and sidebar */
-.body {
-    flex: 1;
-    display: flex;
-    min-height: 0; /* IMPORTANT to keep sidebar scroll working */
-}
-
-/* LEFT CONTENT (enemy panel, combat area) */
+/* Center Panel */
 .center {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 1;
+  overflow-y: auto;
 }
 
-/* RIGHT SIDEBAR (inventory) */
+/* Sidebar */
 .sidebar {
-    width: 320px;
-    background: rgba(255, 255, 255, 0.02);
-    border-left: 2px solid rgba(255, 255, 255, 0.05);
-    overflow-y: auto;
-    padding: 12px;
+  grid-row: 1 / span 3;
+  grid-column: 3 / span 1;
+  background-color: #1e293b;
+  overflow-y: auto;
 }
 
-/* BOTTOM ACTION BAR */
+/* Bottom Actionbar */
 .actions {
-    flex: 0 0 auto;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.04);
-    border-top: 2px solid rgba(255, 255, 255, 0.05);
+  grid-row: 3 / span 1;
+  grid-column: 2 / span 1;
 }

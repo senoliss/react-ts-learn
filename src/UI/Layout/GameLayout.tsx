@@ -3,8 +3,9 @@ import { PlayerHUD } from "../Panels/PlayerHUD";
 import { ActionBar } from "../Panels/ActionBar";
 import { EnemyPanel } from "../Panels/EnemyPanel";
 import { useGame } from "../../Lesson 6/GameContext";
-import { HomePanel } from "../HomePanel/HomePanel";
+import { HomePanel } from "../Panels/HomePanel";
 import { SidebarTabs } from "../Panels/SidebarTabs";
+import { LeftNavbar } from "../Panels/LeftNavbar";
 import { HomeView } from "../Panels/HomeViewPanel";
 import type { PlayerData } from "../../Lesson 7/GameLogic/types";
 
@@ -13,40 +14,45 @@ export function GameLayout() {
     return (
 
         // Need to implement here some kind of layout with css grid or flexbox to arrange the panels in a nice way.
-        <>
-        {/* <HomeView playerData={{} as PlayerData} onNavigate={function (view: string): void {
-                throw new Error("Function not implemented.");
-            } } /> */}
-            <HomePanel />
-        </>
-        // <div className={styles.layout}>
+        // <>
+        //     <HomePanel />
+        // </>
+        
+        
+        <div className={styles.layout}>
 
-        //     {/* TOP HUD */}
-        //     <div className={styles.hud}>
-        //         <PlayerHUD />
-        //     </div>
+            {/* LEFT NAVIGATION */}
+            <div className={styles.leftNav}>
+                <LeftNavbar />
+            </div>
 
-        //     {/* MIDDLE CONTENT AREA */}
-        //     <div className={styles.body}>
-                
-        //         {/* LEFT: Main gameplay area */}
-        //         <div className={styles.center}>
-        //             {gameMode === "home" && <HomePanel />}
-        //             {gameMode === "combat" && <EnemyPanel />}
-        //         </div>
+            {/* MAIN CONTENT AREA */}
+            <div className={styles.body}>
 
-        //         {/* RIGHT: Inventory sidebar */}
-        //         <aside className={styles.sidebar}>
-        //             <SidebarTabs />
-        //         </aside>
+                {/* TOP HUD */}
+                <div className={styles.hud}>
+                    {/* <PlayerHUD /> */}
+                </div>
 
-        //     </div>
+                {/* CENTER CONTENT */}
+                <div className={styles.center}>
+                    {gameMode === "home" && <HomePanel />}
+                    {gameMode === "combat" && <EnemyPanel />}
+                </div>
 
-        //     {/* BOTTOM ACTION BAR */}
-        //     <div className={styles.actions}>
-        //         <ActionBar />
-        //     </div>
+                {/* RIGHT SIDEBAR */}
+                <aside className={styles.sidebar}>
+                    <SidebarTabs />
+                </aside>
 
-        // </div>
+            </div>
+
+            {/* ACTION BAR */}
+            <div className={styles.actions}>
+                <ActionBar />
+            </div>
+
+        </div>
+
     );
 }
