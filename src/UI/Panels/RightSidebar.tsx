@@ -5,6 +5,7 @@ import { useGame } from "../../Lesson 6/GameContext";
 import { EquipmentSlots } from "./EquipmentSlots";
 import { InventoryGrid } from "./InventoryGrid";
 import { DetailPanel } from "./DetailPanel";
+import { SpellPanel } from "./SpellPanel";
 
 /** Tabs available on the sidebar */
 const tabs = [
@@ -87,7 +88,7 @@ export function RightSidebar() {
           )}
 
           {activeTab === "skills" && (
-            <SkillsContent
+            <SpellPanel
               skills={skills}
               onSelect={setSelectedItem}
               selectedId={

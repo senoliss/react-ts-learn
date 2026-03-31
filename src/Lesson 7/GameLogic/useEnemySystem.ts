@@ -129,10 +129,17 @@ export function useEnemySystem(takeDamageFromEnemy: (
         return () => clearInterval(interval);
     }, [enemy.attackSpeed, gameMode, playerHealth]);
 
+    const spawnEnemy = () => {
+        const newEnemy = generateEnemy();
+        setEnemy(newEnemy);
+        setLog([]);
+    };
+
     return {
         enemy,
         log,
         playerAttack,
-        addLog
+        addLog,
+        spawnEnemy
     };
 }
