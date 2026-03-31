@@ -3,6 +3,7 @@ import type { LootRarity } from "./lootTypes";
 
 export type EnemyTemplate = {
     name: string;
+    icon: string;
     maxHP: number;
     attackStyle: string;
     damageMin: number;
@@ -30,6 +31,7 @@ export const ENEMIES: EnemyTemplate[] = [
     // ---------------------------------------------------------
     {
         name: "Goblin",
+        icon: "👹",
         maxHP: 50,
         attackStyle: "slashes",
         damageMin: 2,
@@ -80,6 +82,7 @@ export const ENEMIES: EnemyTemplate[] = [
     // ---------------------------------------------------------
     {
         name: "Skeleton",
+        icon: "💀",
         maxHP: 60,
         attackStyle: "strikes",
         damageMin: 3,
@@ -130,6 +133,7 @@ export const ENEMIES: EnemyTemplate[] = [
     // ---------------------------------------------------------
     {
         name: "Wolf",
+        icon: "🐺",
         maxHP: 35,
         attackStyle: "bites",
         damageMin: 1,
@@ -179,6 +183,7 @@ export const ENEMIES: EnemyTemplate[] = [
     // ---------------------------------------------------------
     {
         name: "Bandit",
+        icon: "_BANDIT_",
         maxHP: 35,
         attackStyle: "slashes",
         damageMin: 2,
@@ -229,6 +234,7 @@ export const ENEMIES: EnemyTemplate[] = [
     // ---------------------------------------------------------
     {
         name: "Imp",
+        icon: "👿",
         maxHP: 30,
         attackStyle: "scratches",
         damageMin: 1,

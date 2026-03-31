@@ -8,7 +8,7 @@ export function CombatView() {
     enemy,
     log,
     health,
-    maxHealth,
+    maxHP,
     mana,
     maxMana,
     gameMode,
@@ -18,14 +18,14 @@ export function CombatView() {
     playerAttack,
     castSpell,
     heal,
-    drinkPotion,
+    regenMana,
     spawnEnemy,
   } = useGame();
 
   const enemyHP = enemy.hp;
   const enemyMax = enemy.maxHP;
 
-  const hpPct = (health / maxHealth) * 100;
+  const hpPct = (health / maxHP) * 100;
   const manaPct = (mana / maxMana) * 100;
   const enemyPct = (enemyHP / enemyMax) * 100;
 
@@ -45,9 +45,9 @@ export function CombatView() {
                 {/* HEALTH BAR */}
                 <div className="flex justify-between items-center">
                     <span className="text-white">Health</span>
-                    <span className="text-green-400 text-sm">{health} / {maxHealth}</span>
+                    <span className="text-green-400 text-sm">{health} / {maxHP}</span>
                 </div>
-                <Progress value={(health / maxHealth) * 100} className="h-2 [&>div]:bg-green-500" />
+                <Progress value={(health / maxHP) * 100} className="h-2 [&>div]:bg-green-500" />
                 
                 {/* MANA BAR */}
                 <div className="flex justify-between items-center">
@@ -70,7 +70,7 @@ export function CombatView() {
 
             {/* ✅ COMBAT LOG */}
             <div className="absolute bottom-4 left-4 right-4 bg-slate-900/90 rounded-lg p-4 border border-slate-700 max-h-32 overflow-y-auto">
-                <div className="space-y-1 text-sm">            {log.length === 0 && <p>No recent actions...</p>}
+                <div className="space-y-1 text-sm text-white">            {log.length === 0 && <p>No recent actions...</p>}
                 {log.length === 0 && <p>No recent actions...</p>}
                 {log.map((entry: string, i: number) => (
                         <div 
@@ -83,49 +83,37 @@ export function CombatView() {
             </div>
 
             {/* ✅ ENEMY PANEL */}
-            <div className="text-center z-10">
+            <div className="text-center">
             <div className="text-8xl mb-4 animate-bounce">{enemy.icon}</div>
 
-            <h2 className="text-2xl font-bold">{enemy.name}</h2>
+            <h3 className="text-2xl text-white mb-2">{enemy.name}</h3>
 
-            <div className="mt-2 flex justify-center gap-3">
-                <span
-                className={`px-3 py-1 rounded-full text-xs font-bold ${
-                    enemy.rarity === "boss"
-                    ? "bg-red-600"
-                    : enemy.rarity === "rare"
-                    ? "bg-blue-600"
-                    : enemy.rarity === "uncommon"
-                    ? "bg-green-600"
-                    : "bg-slate-600"
-                }`}
-                >
-                {enemy.rarity}
+            <div className="flex items-center justify-center gap-2 mb-4">
+                {/* If enemy would have rarity then can add it here like this: */}
+                <span className={`px-3 py-1 rounded-full text-xs ${
+                    enemy.rarity === 'boss' ? 'bg-red-600 text-white' :
+                    enemy.rarity === 'rare' ? 'bg-blue-600 text-white' :
+                    enemy.rarity === 'uncommon' ? 'bg-green-600 text-white' :
+                    'bg-slate-600 text-white'
+                    }`}>
+                    {enemy.rarity ?? "COMMON"}
                 </span>
 
                 <span className="text-yellow-400 text-sm font-semibold">
-                Lvl {enemy.level}
+                Lvl {enemy.level} 1
                 </span>
             </div>
 
             {/* Enemy HP */}
-            <div className="w-72 mt-4 mx-auto">
-                <div className="flex justify-between text-sm mb-1">
-                <span>Health</span>
-                <span className="text-red-400">
-                    {enemyHP} / {enemyMax}
-                </span>
-                </div>
-
-                <div className="h-3 bg-black/40 rounded border border-red-500/30 overflow-hidden">
-                <div
-                    className="h-full bg-red-500 transition-all"
-                    style={{ width: `${enemyPct}%` }}
-                />
-                </div>
+            <div className="w-64 mx-auto">
+                <div className="flex justify-between mb-1 text-sm">
+                <span className="text-white">Health</span>
+                <span className="text-red-400">{enemyHP} / {enemyMax}</span>
+              </div>
+              <Progress value={(enemyHP / enemyMax) * 100} className="h-3 [&>div]:bg-red-500" />
             </div>
 
-            {/* ✅ NEW ENEMY BUTTON */}
+            {/*  NEW ENEMY BUTTON - QUESTION IF THIS IS EVEN NEEDED*/}
             {enemyHP <= 0 && (
                 <button
                 onClick={spawnEnemy}
@@ -138,41 +126,41 @@ export function CombatView() {
             </div>
         </div>
 
-        {/* ✅ ACTION BAR */}
-        <div className="bg-slate-900/70 border-t border-slate-700 p-4 flex justify-center gap-4">
+        {/* ✅ ACTION buttons */}
+        <div className="bg-slate-900 border-t border-slate-700 p-4">
+            <div className="flex gap-3 justify-center">
+                <button
+                disabled={enemyHP <= 0 || health <= 0}
+                onClick={() => playerAttack(10)}
+                className="bg-red-600 hover:bg-red-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
+                >
+                <Skull /> Attack
+                </button>
 
-            <CombatButton
-            disabled={enemyHP <= 0 || health <= 0}
-            onClick={playerAttack}
-            color="bg-red-600 hover:bg-red-700"
-            >
-            <Skull /> Attack
-            </CombatButton>
+                <button
+                disabled={mana < 15 || enemyHP <= 0}
+                onClick={() => castSpell(15)}
+                className="bg-purple-600 hover:bg-purple-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
+                >
+                <Zap /> Fireball (15)
+                </button>
 
-            <CombatButton
-            disabled={mana < 15 || enemyHP <= 0}
-            onClick={() => castSpell(15)}
-            color="bg-purple-600 hover:bg-purple-700"
-            >
-            <Zap /> Fireball (15)
-            </CombatButton>
+                <button
+                disabled={mana < 20 || health <= 0}
+                onClick={() => heal(20)}
+                className="bg-green-600 hover:bg-green-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
+                >
+                <Heart /> Heal (20)
+                </button>
 
-            <CombatButton
-            disabled={mana < 20 || health <= 0}
-            onClick={() => heal(20)}
-            color="bg-green-600 hover:bg-green-700"
-            >
-            <Heart /> Heal (20)
-            </CombatButton>
-
-            <CombatButton
-            disabled={health <= 0}
-            onClick={drinkPotion}
-            color="bg-blue-600 hover:bg-blue-700"
-            >
-            <FlaskRound /> Potion
-            </CombatButton>
-
+                <button
+                disabled={health <= 0}
+                onClick={() => regenMana(20)}
+                className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
+                >
+                <FlaskRound /> Potion
+                </button>
+            </div>
         </div>
         </div>
     </div>
