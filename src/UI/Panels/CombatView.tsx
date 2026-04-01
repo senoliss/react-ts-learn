@@ -114,7 +114,7 @@ export function CombatView() {
             </div>
 
             {/*  NEW ENEMY BUTTON - QUESTION IF THIS IS EVEN NEEDED*/}
-            {enemyHP <= 0 && (
+            {/* {enemyHP <= 0 && (
                 <button
                 onClick={spawnEnemy}
                 className="mt-4 bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg flex items-center gap-2 mx-auto"
@@ -122,7 +122,7 @@ export function CombatView() {
                 <RefreshCw size={16} />
                 New Enemy
                 </button>
-            )}
+            )} */}
             </div>
         </div>
       </div>
@@ -139,7 +139,7 @@ export function CombatView() {
           </button>
 
           <button
-            disabled={mana < 15 || enemyHP <= 0}
+            disabled={mana < 15 || enemyHP <= 0 || health <= 0}
             onClick={() => castSpell(15)}
             className="bg-purple-600 hover:bg-purple-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
           >

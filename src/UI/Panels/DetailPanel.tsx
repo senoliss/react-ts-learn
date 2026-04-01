@@ -1,4 +1,5 @@
 import { type Item, type Skill, type Quest } from '../../Lesson 7/GameLogic/types';
+import { useGame } from '../../Lesson 6/GameContext';
 import { Sword, Shield, Heart, Sparkles, Star, BookOpen } from 'lucide-react';
 
 interface DetailPanelProps {
@@ -33,12 +34,21 @@ export function DetailPanel({ selectedItem, type }: DetailPanelProps) {
 }
 
 function ItemDetail({ item }: { item: Item }) {
+  const { useItem, removeItem } = useGame();
+
   const rarityColors = {
     common: 'text-slate-400 border-slate-600',
     uncommon: 'text-green-400 border-green-600',
     rare: 'text-blue-400 border-blue-600',
     epic: 'text-purple-400 border-purple-600',
     legendary: 'text-orange-400 border-orange-600',
+  };
+
+  const handleUseItem = () => {
+    if (item.effect) {
+      item.effect();
+    }
+    useItem(item.id, item.effect);
   };
 
   return (
@@ -93,6 +103,18 @@ function ItemDetail({ item }: { item: Item }) {
         <h4 className="text-sm text-slate-400 uppercase tracking-wide mb-2">Description</h4>
         <p className="text-white leading-relaxed">{item.description}</p>
       </div>
+
+      {/* Use/Equip button */}
+      {item.effect && (
+        <div className="mb-6">
+          <button
+            onClick={handleUseItem}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"
+          >
+            Use Item
+          </button>
+        </div>
+      )}
 
       {/* Lore */}
       {item.lore && (

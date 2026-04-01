@@ -35,7 +35,7 @@ export function useEnemySystem(takeDamageFromEnemy: (
         addItem({
             ...loot,
             id: loot.id,
-            type: loot.type || "material",
+            type: loot.type || "misc",
         });
         
         addLog(

@@ -67,7 +67,7 @@ export const ENEMIES: EnemyTemplate[] = [
             },
             {
                 
-                weight: 20,
+                weight: 90,
                 items: [
                     {
                         rarity: "common",
