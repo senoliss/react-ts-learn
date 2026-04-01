@@ -30,12 +30,12 @@ export function CombatView() {
   const enemyPct = (enemyHP / enemyMax) * 100;
 
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col min-h-0">
 
       {/* Combat Arena */}
-      <div className="flex-1 p-8 flex flex-col">
+      <div className="flex-1 min-h-0 overflow-y-auto p-8 flex flex-col gap-6">
         {/* PLAYER HUD */}
-        <div className="bg-slate-900/50 rounded-lg p-4 border border-slate-700 mb-6">
+        <div className="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
           <div className="flex items-center gap-4">
                 <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-2xl">
                 ⚔️
@@ -125,44 +125,44 @@ export function CombatView() {
             )}
             </div>
         </div>
+      </div>
 
-        {/* ✅ ACTION buttons */}
-        <div className="bg-slate-900 border-t border-slate-700 p-4">
-            <div className="flex gap-3 justify-center">
-                <button
-                disabled={enemyHP <= 0 || health <= 0}
-                onClick={() => playerAttack(10)}
-                className="bg-red-600 hover:bg-red-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
-                >
-                <Skull /> Attack
-                </button>
+      {/* ✅ ACTION buttons (sticky bottom, full width) */}
+      <div className="sticky bottom-0 z-10 bg-slate-900 border-t border-slate-700">
+        <div className="p-4 flex gap-3 justify-center">
+          <button
+            disabled={enemyHP <= 0 || health <= 0}
+            onClick={() => playerAttack(10)}
+            className="bg-red-600 hover:bg-red-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
+          >
+            <Skull /> Attack
+          </button>
 
-                <button
-                disabled={mana < 15 || enemyHP <= 0}
-                onClick={() => castSpell(15)}
-                className="bg-purple-600 hover:bg-purple-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
-                >
-                <Zap /> Fireball (15)
-                </button>
+          <button
+            disabled={mana < 15 || enemyHP <= 0}
+            onClick={() => castSpell(15)}
+            className="bg-purple-600 hover:bg-purple-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
+          >
+            <Zap /> Fireball (15)
+          </button>
 
-                <button
-                disabled={mana < 20 || health <= 0}
-                onClick={() => heal(20)}
-                className="bg-green-600 hover:bg-green-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
-                >
-                <Heart /> Heal (20)
-                </button>
+          <button
+            disabled={mana < 20 || health <= 0}
+            onClick={() => heal(20)}
+            className="bg-green-600 hover:bg-green-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
+          >
+            <Heart /> Heal (20)
+          </button>
 
-                <button
-                disabled={health <= 0}
-                onClick={() => regenMana(20)}
-                className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
-                >
-                <FlaskRound /> Potion
-                </button>
-            </div>
+          <button
+            disabled={health <= 0}
+            onClick={() => regenMana(20)}
+            className="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
+          >
+            <FlaskRound /> Potion
+          </button>
         </div>
-        </div>
+      </div>
     </div>
   );
 }

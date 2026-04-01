@@ -46,7 +46,7 @@ export function GameLayout() {
 
         // </div>
 
-        <div className="size-full flex bg-slate-950">
+        <div className="h-screen w-screen flex bg-slate-950 overflow-hidden">
 
             {/* LEFT NAVIGATION */}
             <LeftNavbar />
