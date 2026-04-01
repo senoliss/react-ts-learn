@@ -6,11 +6,13 @@ import { EquipmentSlots } from "./EquipmentSlots";
 import { InventoryGrid } from "./InventoryGrid";
 import { DetailPanel } from "./DetailPanel";
 import { SpellPanel } from "./SpellPanel";
+import { QuestPanel } from "./QuestPanel";
+import { StatsPanel } from "./StatsPanel";
 
 /** Tabs available on the sidebar */
 const tabs = [
   { id: "inventory", label: "Inventory", icon: Backpack },
-  { id: "skills", label: "Skills", icon: BookOpen },
+  { id: "spells", label: "Spells", icon: BookOpen },
   { id: "quests", label: "Quests", icon: ScrollText },
   { id: "stats", label: "Stats", icon: Target },
 ];
@@ -19,13 +21,11 @@ export function RightSidebar() {
   const {
     inventory,
     equipment,
-    skills,
-    quests,
     selectedItem,
     setSelectedItem,
   } = useGame();
 
-  const [activeTab, setActiveTab] = useState<"inventory" | "skills" | "quests" | "stats">(
+  const [activeTab, setActiveTab] = useState<"inventory" | "spells" | "quests" | "stats">(
     "inventory"
   );
 
@@ -50,7 +50,10 @@ export function RightSidebar() {
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => {
+                  setActiveTab(tab.id as any);
+                  setSelectedItem(null);
+                }}
                 className={`flex-1 px-3 py-3 flex items-center justify-center gap-1 transition-all ${
                   isActive
                     ? "bg-slate-800 text-purple-400 border-b-2 border-purple-400"
@@ -65,6 +68,7 @@ export function RightSidebar() {
 
         {/* TAB CONTENT */}
         <div className="flex-1 p-3 overflow-y-auto">
+          {/* EQUIPMENT & INVENTORY */}
           {activeTab === "inventory" && (
             <div className="space-y-4">
               <EquipmentSlots
@@ -84,28 +88,14 @@ export function RightSidebar() {
               />
             </div>
           )}
+          {/* SPELLS */}
+          {activeTab === "spells" && <SpellPanel />}
 
-          {activeTab === "skills" && (
-            <SpellPanel
-              skills={skills}
-              onSelect={setSelectedItem}
-              selectedId={
-                selectedType === "skill" ? (selectedItem as any)?.id : undefined
-              }
-            />
-          )}
+          {/* QUESTS */}
+          {activeTab === "quests" && <QuestPanel />}
 
-          {activeTab === "quests" && (
-            <QuestsContent
-              quests={quests}
-              onSelect={setSelectedItem}
-              selectedId={
-                selectedType === "quest" ? (selectedItem as any)?.id : undefined
-              }
-            />
-          )}
-
-          {activeTab === "stats" && <StatsContent />}
+          {/* STATS */}
+          {activeTab === "stats" && <StatsPanel />}
         </div>
       </div>
 

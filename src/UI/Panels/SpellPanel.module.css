@@ -1,26 +1,63 @@
 .panel {
-    text-align: center;
+    text-align: left;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 4 cards per row */
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 10px;
 }
 
 .card {
     background: rgba(255, 255, 255, 0.05);
-    padding: 10px;
-    border-radius: 8px;
+    padding: 8px;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 10px;
 }
 
 .icon {
-    font-size: 32px;
-    margin-bottom: 5px;
+    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.body {
+    flex: 1;
+    min-width: 0;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.info {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 3px;
+}
+
+.castButton {
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(79, 70, 229, 0.9);
+    color: #fff;
+    cursor: pointer;
+}
+
+.castButton:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
 }
 
 .name {

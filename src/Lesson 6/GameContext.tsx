@@ -39,8 +39,79 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     );
     const [selectedItem, setSelectedItem] = useState<Item | Skill | Quest | null>(null);
     const [equipment, setEquipment] = useState<Equipment>({});
-    const [skills, setSkills] = useState<Skill[]>([]);
-    const [quests, setQuests] = useState<Quest[]>([]);
+
+    // Mockup data for skills - TODO: replace with player data from backend
+    const mockSkills: Skill[] = [
+      {
+        id: "fireball",
+        name: "Fireball",
+        type: "active",
+        manaCost: 20,
+        cooldown: 3000,
+        damage: 50,
+        icon: "🔥",
+        description: "Launches a fireball at the enemy",
+        lore: "An ancient spell passed down through generations",
+        unlockLevel: 1,
+        isUnlocked: true,
+      },
+      {
+        id: "heal",
+        name: "Heal",
+        type: "active",
+        manaCost: 15,
+        cooldown: 5000,
+        healing: 30,
+        icon: "💚",
+        description: "Restores health to the player",
+        lore: "A gentle spell of restoration",
+        unlockLevel: 2,
+        isUnlocked: true,
+      },
+      {
+        id: "shield",
+        name: "Shield",
+        type: "passive",
+        icon: "🛡️",
+        description: "Increases defense",
+        lore: "A protective barrier",
+        unlockLevel: 3,
+        isUnlocked: false,
+      },
+    ];
+    const [skills, setSkills] = useState<Skill[]>(mockSkills);
+
+    // Mockup data for quests - TODO: replace with player data from backend
+    const mockQuests: Quest[] = [
+      {
+        id: "kill_goblins",
+        name: "Slay the Goblins",
+        description: "Defeat 5 goblins in the forest",
+        objectives: ["Defeat 5 goblins"],
+        rewards: { xp: 100, gold: 50, items: [] },
+        status: "active",
+        lore: "The goblins have been terrorizing the village",
+      },
+      {
+        id: "find_treasure",
+        name: "Find the Lost Treasure",
+        description: "Locate the hidden treasure in the cave",
+        objectives: ["Find the treasure chest"],
+        rewards: { xp: 200, gold: 100, items: [] },
+        status: "available",
+        lore: "Legends speak of a great treasure",
+      },
+      {
+        id: "rescue_villager",
+        name: "Rescue the Villager",
+        description: "Save the kidnapped villager",
+        objectives: ["Rescue the villager"],
+        rewards: { xp: 150, gold: 75, items: [] },
+        status: "completed",
+        lore: "A brave villager awaits rescue",
+      },
+    ];
+    const [quests, setQuests] = useState<Quest[]>(mockQuests);
 
     // Wrap healing functions to clamp at dynamic maxHP (not hardcoded 100)
     const healClamped = (amount: number) => {
@@ -58,9 +129,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         setGameMode,
         selectedItem,
         setSelectedItem,
-        skills: [],
-        quests: [],
-        equipment: {},
+        skills,
+        quests,
+        equipment,
         ...healthSystem,
         ...manaSystem,
         ...xpSystem,
