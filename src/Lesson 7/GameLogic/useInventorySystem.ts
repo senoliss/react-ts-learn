@@ -7,11 +7,11 @@ export function useInventorySystem() {
     const addItem = (item: Item) => {
         setInventory((prev) => {
             // check if stackable item exists
-            const existing = prev.find(i => i.name === item.name);
+            const existing = prev.find(i => i.id === item.id);
 
             if (existing) {
                 return prev.map(i =>
-                    i.name === item.name
+                    i.id === item.id
                         ? { ...i, amount: i.amount + item.amount }
                         : i
                 );

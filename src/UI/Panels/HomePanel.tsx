@@ -66,25 +66,25 @@ export function HomePanel() {
                 <span className="text-white">Health</span>
                 <span className="text-green-400">{health} / {maxHP}</span>
               </div>
-              <Progress value={(health / maxHP) * 100} className="h-3" />
+              <Progress value={(health / maxHP) * 100} className="h-3 [&>div]:bg-green-600" />
             </div>
 
             {/* Mana */}
             <div>
               <div className="flex justify-between mb-1 text-sm">
                 <span className="text-white">Mana</span>
-                <span className="text-blue-400">{mana} / {maxMana}</span>
+                <span className="text-blue-400 ">{mana} / {maxMana}</span>
               </div>
-              <Progress value={(mana / maxMana) * 100} className="h-3 [&>div]:bg-blue-500" />
+              <Progress value={(mana / maxMana) * 100} className="h-3 [&>div]:bg-blue-600" />
             </div>
 
             {/* XP */}
             <div>
               <div className="flex justify-between mb-1 text-sm">
-                <span className="text-white">Experience</span>
-                <span className="text-purple-400">{xp} / {maxXp}</span>
+                <span className="text-amber-400">Experience</span>
+                <span className="text-amber-400">{xp} / {maxXp}</span>
               </div>
-              <Progress value={(xp / maxXp) * 100} className="h-3 [&>div]:bg-purple-500" />
+              <Progress value={(xp / maxXp) * 100} className="h-3 [&>div]:bg-amber-500" />
             </div>
           </div>
         </div>
@@ -165,8 +165,8 @@ export function HomePanel() {
               Store valuable items safely in your personal bank vault.
             </p>
 
-            <div className="grid grid-cols-4 gap-2 mb-4">
-              {Array(8)
+            <div className="grid grid-cols-6 gap-2 mb-4">
+              {Array(12)
                 .fill(null)
                 .map((_, i) => (
                   <div

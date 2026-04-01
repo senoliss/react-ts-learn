@@ -35,7 +35,7 @@ export function EquipmentSlots({ equipment, onSelect, selectedId }: EquipmentSlo
     <div className="mb-4">
       <h3 className="text-white mb-4 text-sm uppercase tracking-wide">Equipment</h3>
 
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-5 gap-2">
         {slots.map((slot) => {
           const item = equipment[slot.key];
           const isSelected = item && item.id === selectedId;

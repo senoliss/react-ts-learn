@@ -30,13 +30,12 @@ export function useEnemySystem(takeDamageFromEnemy: (
     const loot = rollLoot(dead);
 
     if (loot) {
+        // Use loot template id here so identical items stack in inventory.
+        // If you need unique instances in future, add instanceId separately.
         addItem({
-            id: crypto.randomUUID(),
-            name: loot.name,
-            icon: loot.icon,
-            amount: loot.amount,
+            ...loot,
+            id: loot.id,
             type: loot.type || "material",
-            rarity: loot.rarity
         });
         
         addLog(
@@ -96,7 +95,7 @@ export function useEnemySystem(takeDamageFromEnemy: (
                 
                 return {
                     ...item,
-                    rarity: entry.rarity
+                    rarity: entry.items[0].rarity
                 };
             }
         }

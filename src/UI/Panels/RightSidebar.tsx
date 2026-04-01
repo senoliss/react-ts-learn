@@ -29,14 +29,12 @@ export function RightSidebar() {
     "inventory"
   );
 
-  const selectedType =
-    selectedItem?.type === "item"
-      ? "item"
-      : selectedItem?.type === "skill"
-      ? "skill"
-      : selectedItem?.type === "quest"
-      ? "quest"
-      : null;
+  const selectedType = selectedItem ? (
+    'rarity' in selectedItem ? 'item' :
+    'manaCost' in selectedItem ? 'skill' :
+    'objectives' in selectedItem ? 'quest' :
+    null
+  ) : null;
 
   return (
     <div className="w-[600px] bg-slate-900 border-l border-slate-700 flex">
@@ -113,7 +111,7 @@ export function RightSidebar() {
 
       {/* RIGHT: DETAILS PANEL */}
       <div className="flex-1 p-4">
-        <DetailPanel selectedItem={selectedItem} />
+        <DetailPanel selectedItem={selectedItem} type={selectedType} />
       </div>
     </div>
   );

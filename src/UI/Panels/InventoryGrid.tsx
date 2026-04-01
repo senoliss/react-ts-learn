@@ -23,7 +23,7 @@ export function InventoryGrid({ items, onSelect, selectedId }: InventoryGridProp
     <div>
       <h3 className="text-white mb-3 text-sm uppercase tracking-wide">Inventory</h3>
 
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-5 gap-2">
         {filledSlots.map((item) => {
           const isSelected = item.id === selectedId;
 
