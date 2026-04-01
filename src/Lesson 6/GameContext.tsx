@@ -42,7 +42,16 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const [skills, setSkills] = useState<Skill[]>([]);
     const [quests, setQuests] = useState<Quest[]>([]);
 
-    
+    // Wrap healing functions to clamp at dynamic maxHP (not hardcoded 100)
+    const healClamped = (amount: number) => {
+        const effectiveAmount = Math.min(amount, stats.maxHP - healthSystem.health);
+        healthSystem.heal(effectiveAmount);
+    };
+
+    const drinkPotionClamped = (amount: number = 30) => {
+        const effectiveAmount = Math.min(amount, stats.maxHP - healthSystem.health);
+        healthSystem.drinkPotion(effectiveAmount);
+    };
 
     const value = {
         gameMode,
@@ -60,6 +69,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         ...enemySystem,
         ...spellSystem,
         ...stats,
+        // Override heal and drinkPotion with clamped versions
+        heal: healClamped,
+        drinkPotion: drinkPotionClamped,
     };
 
     // --- Provide state and actions to children ---

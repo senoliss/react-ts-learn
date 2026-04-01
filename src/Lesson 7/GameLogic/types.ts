@@ -9,7 +9,6 @@ export type Item = {
     amount: number;      // stackable count
     description?: string;
     effect?: () => void; // optional on-use effect
-
   // Figma UI expects these:
     slot?: "helmet" | "chest" | "legs" | "boots" | "gloves" |
           "ring1" | "ring2" | "amulet" | "cape" | "pet" |
@@ -23,7 +22,7 @@ export type Item = {
     };
 
     lore?: string;
-
+    effectKey?: "heal_small" | "heal_large" | "equip_weapon" | "equip_armor" | "buff_attack" | "buff_defense";
 };
 
 

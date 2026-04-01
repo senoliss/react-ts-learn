@@ -25,20 +25,16 @@ export function useInventorySystem() {
         setInventory(prev => prev.filter(item => item.id !== id));
     };
 
-    const useItem = (id: string, fn?: () => void) => {
+    const useItem = (id: string) => {
         setInventory(prev => {
             return prev.flatMap(item => {
                 if (item.id !== id) return [item];
-
-                // call optional effect
-                if(fn) fn();
 
                 if (item.amount > 1) {
                     return { ...item, amount: item.amount - 1 };
                 }
 
-                return [];  //remopve item if amount is 1
-
+                return [];
             });
         });
     };

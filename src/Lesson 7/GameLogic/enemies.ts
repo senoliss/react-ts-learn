@@ -78,9 +78,7 @@ export const ENEMIES: EnemyTemplate[] = [
                         amount: 1,
                         description: "Restore a small amount of health instantly.",
                         lore: "A faint green fluid that bubbles with healing energy.",
-                        effect: () => {
-                            // Engine should resolve and apply this effect (e.g., restore health).
-                        },
+                        effectKey: "heal_small",
                     }
                 ]
             },
@@ -111,9 +109,7 @@ export const ENEMIES: EnemyTemplate[] = [
                         amount: 1,
                         description: "A trinket said to grant you better chances in battle.",
                         lore: "Crafted from bone, herb, and stolen gem by goblin warlocks.",
-                        effect: () => {
-                            // Add RNG bonus in engine logic if this item is equipped/used.
-                        },
+                        effectKey: "buff_attack",
                     }
                 ]
             }
@@ -194,9 +190,7 @@ export const ENEMIES: EnemyTemplate[] = [
                         },
                         description: "An old ring imbued with ancient magic; increases senses.",
                         lore: "Once owned by a forgotten king, this ring still hums with power.",
-                        effect: () => {
-                            // equip/unequip effect should be interpreted by engine system.
-                        },
+                        effectKey: "equip_armor",
                     }
                 ]
             },
@@ -373,9 +367,7 @@ export const ENEMIES: EnemyTemplate[] = [
                         stats: { attack: 2 },
                         description: "A sharp dagger with a wisp of envenomed edge.",
                         lore: "Favored by rogues for quick strikes and escape.",
-                        effect: () => {
-                            // system should apply the dagger's bonus when equipped.
-                        },
+                        effectKey: "equip_weapon",
                     }
                 ]
             },
@@ -392,9 +384,7 @@ export const ENEMIES: EnemyTemplate[] = [
                         stats: { defense: 2, health: 3 },
                         description: "A hood woven from shadows, gives the wearer improved evasion.",
                         lore: "Crafted in secret by a forgotten bandit clan.",
-                        effect: () => {
-                            // engine might grant stealth bonus when equipped.
-                        },
+                        effectKey: "equip_armor",
                     }
                 ]
             }
@@ -462,9 +452,7 @@ export const ENEMIES: EnemyTemplate[] = [
                         amount: 1,
                         description: "A volatile spirit of flame that boosts fire spells.",
                         lore: "This molten core once burned in the pit of the imp's lair.",
-                        effect: () => {
-                            // engine-defined effect for fire damage buff.
-                        },
+                        effectKey: "buff_attack",
                     }
                 ]
             },
@@ -481,9 +469,7 @@ export const ENEMIES: EnemyTemplate[] = [
                         stats: { defense: 1, mana: 5 },
                         description: "A charm that hums with fitted imp flight magic.",
                         lore: "Forged from the wings of an imp, it grants agility.",
-                        effect: () => {
-                            // engine-defined effect, e.g., +1 dodge or speed.
-                        },
+                        effectKey: "equip_armor",
                     }
                 ]
             }

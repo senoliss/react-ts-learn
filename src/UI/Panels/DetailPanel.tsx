@@ -1,5 +1,6 @@
 import { type Item, type Skill, type Quest } from '../../Lesson 7/GameLogic/types';
 import { useGame } from '../../Lesson 6/GameContext';
+import { applyItemEffect } from '../../Lesson 7/GameLogic/itemEffects';
 import { Sword, Shield, Heart, Sparkles, Star, BookOpen } from 'lucide-react';
 
 interface DetailPanelProps {
@@ -34,7 +35,7 @@ export function DetailPanel({ selectedItem, type }: DetailPanelProps) {
 }
 
 function ItemDetail({ item }: { item: Item }) {
-  const { useItem, removeItem } = useGame();
+  const { useItem, heal, regenMana, addLog } = useGame();
 
   const rarityColors = {
     common: 'text-slate-400 border-slate-600',
@@ -45,10 +46,13 @@ function ItemDetail({ item }: { item: Item }) {
   };
 
   const handleUseItem = () => {
-    if (item.effect) {
-      item.effect();
-    }
-    useItem(item.id, item.effect);
+    applyItemEffect(item.effectKey, item, {
+      heal,
+      regenMana,
+      addLog,
+    });
+
+    useItem(item.id);
   };
 
   return (
@@ -105,7 +109,7 @@ function ItemDetail({ item }: { item: Item }) {
       </div>
 
       {/* Use/Equip button */}
-      {item.effect && (
+      {item.effectKey && (
         <div className="mb-6">
           <button
             onClick={handleUseItem}

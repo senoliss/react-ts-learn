@@ -8,10 +8,10 @@ export function useHealthSystem() {
         setHealth(h => Math.max(0, h - amount));
 
     const heal = (amount: number) =>
-        setHealth(h => Math.min(100, h + amount)); // leave 100 for a moment
+        setHealth(h => h + amount);
 
     const drinkPotion = (amount: number = 30) =>
-        setHealth(h => Math.min(100, h + amount));
+        setHealth(h => h + amount);
 
     return {
         health,
