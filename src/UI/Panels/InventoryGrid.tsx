@@ -31,13 +31,18 @@ export function InventoryGrid({ items, onSelect, selectedId }: InventoryGridProp
             <div
               key={item.id}
               onClick={() => onSelect(item)}
-              className={`aspect-square rounded-lg border-2 
+              className={`relative aspect-square rounded-lg border-2 
                   flex items-center justify-center bg-slate-800 cursor-pointer
                   transition-all hover:bg-slate-700 
                   ${rarityColors[item.rarity]} 
                   ${isSelected ? "ring-2 ring-purple-400" : ""}`}
             >
               <span className="text-2xl">{item.icon}</span>
+              {item.amount > 1 && (
+                <span className="absolute top-1 right-1 min-w-[1.25rem] h-5 rounded-full bg-black/70 text-[10px] font-bold text-white flex items-center justify-center px-1">
+                  {item.amount}
+                </span>
+              )}
             </div>
           );
         })}
