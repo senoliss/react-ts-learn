@@ -1,11 +1,8 @@
 import styles from "./GameLayout.module.css";
-import { PlayerHUD } from "../Panels/PlayerHUD";
 import { ActionBar } from "../Panels/ActionBar";
-import { EnemyPanel } from "../Panels/EnemyPanel copy";
 import { useGame } from "../../Lesson 6/GameContext";
 import { HomePanel } from "../Panels/HomePanel";
 import { LeftNavbar } from "../Panels/LeftNavbar";
-import { HomeView } from "../Panels/HomeViewPanel";
 import type { PlayerData } from "../../Lesson 7/GameLogic/types";
 import { RightSidebar } from "../Panels/RightSidebar";
 import { CombatView } from "../Panels/CombatView";
@@ -55,7 +52,6 @@ export function GameLayout() {
             {/* CENTER CONTENT */}
             {gameMode === "home" && <HomePanel />}
             {gameMode === "combat" && <CombatView />}
-            {/* {gameMode === "combat" && <EnemyPanel />} */}
 
             {/* RIGHT SIDEBAR */}
             <RightSidebar />

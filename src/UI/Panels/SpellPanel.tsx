@@ -1,10 +1,9 @@
 import { useGame } from "../../Lesson 6/GameContext";
-import type { Skill } from "../../Lesson 7/GameLogic/types";
+import type { Spell } from "../../Lesson 7/GameLogic/spells";
 
 export function SpellPanel() {
     const {
         spells,
-        skills,
         cooldowns,
         castSpell,
         mana,
@@ -14,34 +13,14 @@ export function SpellPanel() {
         setSelectedItem,
     } = useGame();
 
-    const activeSkillSpells = skills
-      .filter((skill: Skill) => skill.type === "active")
-      .map((skill: Skill) => ({
-        id: skill.id,
-        name: skill.name,
-        icon: skill.icon,
-        manaCost: skill.manaCost || 0,
-        cooldown: skill.cooldown || 0,
-        type: skill.damage ? "damage" : skill.healing ? "heal" : "damage",
-        amount: skill.damage || skill.healing || 0,
-        description: skill.description || "",
-        unlocked: skill.isUnlocked,
-        source: "skill" as const,
-      }));
-
-    const visibleSpells = [
-      ...spells.map((spell: any) => ({ ...spell, source: "spell" as const, unlocked: true })),
-      ...activeSkillSpells,
-    ];
 
     return (
         <div className="space-y-2">
             <div className="grid grid-cols-4 gap-2">
-                {visibleSpells.map((spell) => {
+                {spells.map((spell: Spell) => {
                     const cd = cooldowns[spell.id] || 0;
                     // Can only be cast in combat mode, and if player has enough mana, spell is unlocked, and player is alive
                     const canCast =
-                        spell.unlocked &&
                         cd === 0 &&
                         mana >= spell.manaCost &&
                         health > 0 &&
@@ -51,29 +30,19 @@ export function SpellPanel() {
 
                     return (
                         <div
-                            key={`${spell.source}-${spell.id}`}
+                            key={spell.id}
                             className={`bg-slate-800 p-3 rounded-lg hover:bg-slate-700 transition-all cursor-pointer border-2 ${
                                 isSelected ? 'border-purple-400' : 'border-transparent'
-                                } ${!spell.isUnlocked ? 'opacity-50' : ''}`}
+                                }`}
                             onClick={() => setSelectedItem(spell)}
                         >
                             <div className="w-10 h-10 bg-purple-900/50 rounded-lg flex items-center justify-center text-xl border border-purple-600">{spell.icon}</div>
                             <button
-                                className="bg-blue-500 hover:bg-blue-600 text-white my-1 py-0.5 px-1.5 rounded-md text-sm cursor-pointer"
+                                className="w-full bg-blue-500 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white my-1 py-0.5 px-1.5 rounded-md text-sm cursor-pointer"
                                 disabled={!canCast}
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    if (!spell.unlocked) return;
-                                    castSpell({
-                                        id: spell.id,
-                                        name: spell.name,
-                                        icon: spell.icon,
-                                        manaCost: spell.manaCost,
-                                        cooldown: spell.cooldown,
-                                        type: spell.type,
-                                        amount: spell.amount,
-                                        description: spell.description,
-                                    });
+                                    castSpell(spell);
                                 }}
                             >
                                 {cd > 0 ? `${Math.ceil(cd / 1000)}s` : "Cast"}

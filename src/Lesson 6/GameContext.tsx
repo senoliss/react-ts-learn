@@ -29,11 +29,15 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         gameMode, 
         xpSystem.gainXP, 
         inventorySystem.addItem);
+    const healClamped = (amount: number) => {
+        const effectiveAmount = Math.min(amount, stats.maxHP - healthSystem.health);
+        healthSystem.heal(effectiveAmount);
+    };
     const spellSystem = useSpellSystem(
         manaSystem.mana, 
         manaSystem.setMana, 
         healthSystem.health, 
-        healthSystem.heal, 
+        healClamped, 
         enemySystem.playerAttack, 
         enemySystem.addLog
     );
@@ -41,45 +45,6 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const [equipment, setEquipment] = useState<Equipment>({});
 
     // Mockup data for skills - TODO: replace with player data from backend
-    const mockSkills: Skill[] = [
-      {
-        id: "fireball",
-        name: "Fireball",
-        type: "active",
-        manaCost: 20,
-        cooldown: 3000,
-        damage: 50,
-        icon: "🔥",
-        description: "Launches a fireball at the enemy",
-        lore: "An ancient spell passed down through generations",
-        unlockLevel: 1,
-        isUnlocked: true,
-      },
-      {
-        id: "heal",
-        name: "Heal",
-        type: "active",
-        manaCost: 15,
-        cooldown: 5000,
-        healing: 30,
-        icon: "💚",
-        description: "Restores health to the player",
-        lore: "A gentle spell of restoration",
-        unlockLevel: 2,
-        isUnlocked: true,
-      },
-      {
-        id: "shield",
-        name: "Shield",
-        type: "passive",
-        icon: "🛡️",
-        description: "Increases defense",
-        lore: "A protective barrier",
-        unlockLevel: 3,
-        isUnlocked: false,
-      },
-    ];
-    const [skills, setSkills] = useState<Skill[]>(mockSkills);
 
     // Mockup data for quests - TODO: replace with player data from backend
     const mockQuests: Quest[] = [
@@ -114,11 +79,6 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     const [quests, setQuests] = useState<Quest[]>(mockQuests);
 
     // Wrap healing functions to clamp at dynamic maxHP (not hardcoded 100)
-    const healClamped = (amount: number) => {
-        const effectiveAmount = Math.min(amount, stats.maxHP - healthSystem.health);
-        healthSystem.heal(effectiveAmount);
-    };
-
     const drinkPotionClamped = (amount: number = 30) => {
         const effectiveAmount = Math.min(amount, stats.maxHP - healthSystem.health);
         healthSystem.drinkPotion(effectiveAmount);
@@ -129,7 +89,6 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         setGameMode,
         selectedItem,
         setSelectedItem,
-        skills,
         quests,
         equipment,
         ...healthSystem,

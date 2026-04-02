@@ -26,7 +26,7 @@ export const SPELLS: Spell[] = [
         name: "Ice Lance",
         icon: "❄️",
         manaCost: 15,
-        cooldown: 2500,
+        cooldown: 3000,
         type: "damage",
         amount: 18,
         description: "A sharp icicle that deals moderate damage."
@@ -37,9 +37,31 @@ export const SPELLS: Spell[] = [
         name: "Greater Heal",
         icon: "✨",
         manaCost: 25,
-        cooldown: 5000,
+        cooldown: 2500,
         type: "heal",
         amount: 30,
         description: "Heals yourself for 30 HP."
-    }
+    },
+
+    {
+        id: "heal",
+        name: "Heal",
+        icon: "💚",
+        manaCost: 15,
+        cooldown: 3000,
+        type: "heal",
+        amount: 30,
+        description: "Restores health to the player"
+    },
+
+    {
+        id: "shield",
+        name: "Shield",
+        icon: "🛡️",
+        manaCost: 10,
+        cooldown: 3000,
+        type: "heal",
+        amount: 20,
+        description: "Increases defense"
+    },
 ];
