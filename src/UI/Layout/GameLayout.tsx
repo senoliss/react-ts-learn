@@ -4,7 +4,6 @@ import { ActionBar } from "../Panels/ActionBar";
 import { EnemyPanel } from "../Panels/EnemyPanel copy";
 import { useGame } from "../../Lesson 6/GameContext";
 import { HomePanel } from "../Panels/HomePanel";
-import { SidebarTabs } from "../Panels/SidebarTabs";
 import { LeftNavbar } from "../Panels/LeftNavbar";
 import { HomeView } from "../Panels/HomeViewPanel";
 import type { PlayerData } from "../../Lesson 7/GameLogic/types";
