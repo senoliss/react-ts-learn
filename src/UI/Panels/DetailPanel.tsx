@@ -1,11 +1,12 @@
 import { type Item, type Skill, type Quest } from '../../Lesson 7/GameLogic/types';
+import type { Spell } from '../../Lesson 7/GameLogic/spells';
 import { useGame } from '../../Lesson 6/GameContext';
 import { applyItemEffect } from '../../Lesson 7/GameLogic/itemEffects';
 import { Sword, Shield, Heart, Sparkles, Star, BookOpen } from 'lucide-react';
 
 interface DetailPanelProps {
-  selectedItem: Item | Skill | Quest | null;
-  type: 'item' | 'skill' | 'quest' | null;
+  selectedItem: Item | Skill | Quest | Spell | null;
+  type: 'item' | 'skill' | 'quest' | 'spell' | null;
 }
 
 export function DetailPanel({ selectedItem, type }: DetailPanelProps) {
@@ -13,7 +14,7 @@ export function DetailPanel({ selectedItem, type }: DetailPanelProps) {
     return (
       <div className="bg-slate-800/50 rounded-lg p-6 border border-slate-700 h-full flex items-center justify-center">
         <p className="text-slate-500 text-center">
-          Select an item, skill, or quest to view details
+          Select a spell to set as Auto Cast, or pick an item/quest to view details
         </p>
       </div>
     );
@@ -25,6 +26,10 @@ export function DetailPanel({ selectedItem, type }: DetailPanelProps) {
 
   if (type === 'skill') {
     return <SkillDetail skill={selectedItem as Skill} />;
+  }
+
+  if (type === 'spell') {
+    return <SpellDetail spell={selectedItem as Spell} />;
   }
 
   if (type === 'quest') {
@@ -195,6 +200,71 @@ function SkillDetail({ skill }: { skill: Skill }) {
           <p className="text-slate-400 italic text-sm leading-relaxed">{skill.lore}</p>
         </div>
       )}
+    </div>
+  );
+}
+
+function SpellDetail({ spell }: { spell: Spell }) {
+  const { setAutoCastSpellId, autoCastSpellId, cooldowns } = useGame();
+  const cd = cooldowns[spell.id] || 0;
+  const isAutoCast = autoCastSpellId === spell.id;
+
+  return (
+    <div className="bg-slate-800/50 rounded-lg p-6 border-2 border-blue-600 h-full">
+      {/* Header */}
+      <div className="flex items-start gap-4 mb-6">
+        <div className="w-16 h-16 bg-purple-900/50 rounded-lg flex items-center justify-center text-4xl border-2 border-purple-600">
+          {spell.icon}
+        </div>
+        <div className="flex-1">
+          <h3 className="text-xl text-blue-400 mb-1">{spell.name}</h3>
+          <p className={`text-sm capitalize ${spell.type === 'damage' ? 'text-red-400' : 'text-green-400'}`}>
+            {spell.type === 'damage' ? '⚔️' : '💚'} {spell.type} spell
+          </p>
+        </div>
+      </div>
+
+      {/* Stats */}
+      <div className="mb-6 space-y-2">
+        <h4 className="text-sm text-slate-400 uppercase tracking-wide mb-3">Stats</h4>
+        <div className="flex items-center gap-2 text-white">
+          <Sparkles className="w-4 h-4 text-blue-400" />
+          <span>Mana Cost: {spell.manaCost}</span>
+        </div>
+        <div className="flex items-center gap-2 text-white">
+          {spell.type === 'damage'
+            ? <Sword className="w-4 h-4 text-red-400" />
+            : <Heart className="w-4 h-4 text-green-400" />}
+          <span>{spell.type === 'damage' ? 'Damage' : 'Healing'}: {spell.amount}</span>
+        </div>
+        <div className="flex items-center gap-2 text-white">
+          <span>⏱ Cooldown: {spell.cooldown / 1000}s</span>
+        </div>
+        {cd > 0 && (
+          <div className="flex items-center gap-2 text-orange-400">
+            <span>⏳ On cooldown: {Math.ceil(cd / 1000)}s remaining</span>
+          </div>
+        )}
+      </div>
+
+      {/* Description */}
+      <div className="mb-6">
+        <h4 className="text-sm text-slate-400 uppercase tracking-wide mb-2">Description</h4>
+        <p className="text-white leading-relaxed">{spell.description}</p>
+      </div>
+
+      {/* Auto Cast button */}
+      <button
+        onClick={() => setAutoCastSpellId(spell.id)}
+        className={`w-full py-2 px-4 rounded-lg font-medium transition-all ${
+          isAutoCast
+            ? 'bg-blue-700 text-white border border-blue-400 cursor-default'
+            : 'bg-blue-600 hover:bg-blue-700 text-white cursor-pointer'
+        }`}
+        disabled={isAutoCast}
+      >
+        {isAutoCast ? '✅ Auto Cast Active' : '🔁 Set as Auto Cast'}
+      </button>
     </div>
   );
 }

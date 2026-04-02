@@ -31,8 +31,9 @@ export function RightSidebar() {
 
   const selectedType = selectedItem ? (
     'rarity' in selectedItem ? 'item' :
-    'manaCost' in selectedItem ? 'skill' :
+    'isUnlocked' in selectedItem ? 'skill' :
     'objectives' in selectedItem ? 'quest' :
+    'amount' in selectedItem ? 'spell' :
     null
   ) : null;
 

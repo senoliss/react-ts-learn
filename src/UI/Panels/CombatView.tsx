@@ -20,7 +20,11 @@ export function CombatView() {
     heal,
     regenMana,
     spawnEnemy,
+    autoCastSpell,
+    cooldowns,
   } = useGame();
+
+  const autoCastCd = autoCastSpell ? (cooldowns[autoCastSpell.id] || 0) : 0;
 
   const enemyHP = enemy.hp;
   const enemyMax = enemy.maxHP;
@@ -139,11 +143,16 @@ export function CombatView() {
           </button>
 
           <button
-            disabled={mana < 15 || enemyHP <= 0 || health <= 0}
-            onClick={() => castSpell(15)}
+            disabled={!autoCastSpell || autoCastCd > 0 || mana < (autoCastSpell?.manaCost ?? 0) || enemyHP <= 0 || health <= 0}
+            onClick={() => autoCastSpell && castSpell(autoCastSpell)}
             className="bg-purple-600 hover:bg-purple-700 disabled:bg-slate-700 disabled:opacity-50 text-white px-6 py-3 rounded-lg transition-all flex items-center gap-2 min-w-[140px] justify-center"
           >
-            <Zap /> Fireball (15)
+            <Zap />
+            {autoCastCd > 0
+              ? `${Math.ceil(autoCastCd / 1000)}s`
+              : autoCastSpell
+                ? `${autoCastSpell.icon} ${autoCastSpell.name} (${autoCastSpell.manaCost})`
+                : 'No Spell'}
           </button>
 
           <button

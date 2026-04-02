@@ -3,10 +3,13 @@ import { useGame } from "../../Lesson 6/GameContext";
 
 export function ActionBar() {
     const { takeDamage, heal, castSpell, regenMana, gainXP } = useGame();
-    const {addItem} = useGame();
-    const { health, playerAttack } = useGame();
+    const { addItem } = useGame();
+    const { health, playerAttack, mana, cooldowns } = useGame();
     const { gameMode, setGameMode } = useGame();
-    
+    const { autoCastSpell } = useGame();
+
+    const autoCastCd = autoCastSpell ? (cooldowns[autoCastSpell.id] || 0) : 0;
+    const canAutocast = autoCastSpell && autoCastCd === 0 && mana >= autoCastSpell.manaCost && health > 0 && gameMode === "combat";
 
     return (
         <div className={styles.actions}>
@@ -15,9 +18,10 @@ export function ActionBar() {
                     onClick={() => playerAttack(10)}>
                 Attack Enemy (-10 HP)
             </button>
-            <button onClick={() => castSpell(15)}
-                    disabled={health <= 0}>
-                Cast Spell (-15 Mana)
+            <button
+                onClick={() => autoCastSpell && castSpell(autoCastSpell)}
+                disabled={!canAutocast}>
+                {autoCastSpell ? `${autoCastSpell.icon} ${autoCastSpell.name} (${autoCastSpell.manaCost})` : "No Spell Set"}
             </button>
             <button onClick={() => heal(10)}>Heal (+10 HP)</button>
             <button onClick={() => regenMana(10)}>Meditate (+10 Mana)</button>

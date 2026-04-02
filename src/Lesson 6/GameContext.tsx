@@ -7,7 +7,9 @@ import { useInventorySystem } from "../Lesson 7/GameLogic/useInventorySystem";
 import { useEnemySystem } from "../Lesson 7/GameLogic/useEnemySystem";
 import { useSpellSystem } from "../Lesson 7/GameLogic/useSpellSystem";
 import { useStatsSystem } from "../Lesson 7/GameLogic/useStatsSystem";
+import { SPELLS } from "../Lesson 7/GameLogic/spells";
 import { type Item, type Skill, type Quest, type Equipment } from "../Lesson 7/GameLogic/types";
+import type { Spell } from "../Lesson 7/GameLogic/spells";
 
 // 4. Create the context with a default value (can be empty or have default functions)
 export const GameContext = createContext<any>(undefined);
@@ -18,7 +20,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     // --- shared game state ---
     const stats = useStatsSystem();
     const healthSystem = useHealthSystem();
-    const manaSystem = useManaSystem();
+    const manaSystem = useManaSystem(stats.maxMana);
     const xpSystem = useXPSystem(stats.applyAutoLevelScaling);
     const scoreSystem = useScoreSystem();
     const inventorySystem = useInventorySystem();
@@ -41,8 +43,10 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         enemySystem.playerAttack, 
         enemySystem.addLog
     );
-    const [selectedItem, setSelectedItem] = useState<Item | Skill | Quest | null>(null);
+    const [selectedItem, setSelectedItem] = useState<Item | Skill | Quest | Spell | null>(null);
     const [equipment, setEquipment] = useState<Equipment>({});
+    const [autoCastSpellId, setAutoCastSpellId] = useState<string>(SPELLS[0].id);
+    const autoCastSpell = SPELLS.find(s => s.id === autoCastSpellId) ?? SPELLS[0];
 
     // Mockup data for skills - TODO: replace with player data from backend
 
@@ -91,6 +95,9 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
         setSelectedItem,
         quests,
         equipment,
+        autoCastSpellId,
+        setAutoCastSpellId,
+        autoCastSpell,
         ...healthSystem,
         ...manaSystem,
         ...xpSystem,

@@ -11,6 +11,16 @@ export type Spell = {
 
 export const SPELLS: Spell[] = [
     {
+        id: "air-gush",
+        name: "Air Gush",
+        icon: "💨",
+        manaCost: 5,
+        cooldown: 1000,
+        type: "damage",
+        amount: 8,
+        description: "A basic gust of wind that deals 8 damage."
+    },
+    {
         id: "fireball",
         name: "Fireball",
         icon: "🔥",
