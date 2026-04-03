@@ -16,7 +16,8 @@ export function useEnemySystem(takeDamageFromEnemy: (
         const e = ENEMIES[Math.floor(Math.random() * ENEMIES.length)];
         return {
             ...e,
-            hp: e.maxHP
+            hp: e.maxHP,
+            instanceId: crypto.randomUUID(),
         };
     }
 
@@ -126,7 +127,7 @@ export function useEnemySystem(takeDamageFromEnemy: (
         }, enemy.attackSpeed);
 
         return () => clearInterval(interval);
-    }, [enemy.attackSpeed, gameMode, playerHealth]);
+    }, [enemy.instanceId, enemy.attackSpeed, gameMode, playerHealth]);
 
     const spawnEnemy = () => {
         const newEnemy = generateEnemy();

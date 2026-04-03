@@ -151,7 +151,7 @@ export function CombatView() {
             {autoCastCd > 0
               ? `${Math.ceil(autoCastCd / 1000)}s`
               : autoCastSpell
-                ? `${autoCastSpell.icon} ${autoCastSpell.name} (${autoCastSpell.manaCost})`
+                ? `${autoCastSpell.name} (${autoCastSpell.manaCost})`
                 : 'No Spell'}
           </button>
 

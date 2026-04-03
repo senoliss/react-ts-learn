@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
 import { SPELLS, type Spell } from "./spells";
-import { useGame } from "../../Lesson 6/GameContext";
 
 
 export function useSpellSystem(
     mana: number,
-    setMana: (m: number) => void,
+    setMana: Dispatch<SetStateAction<number>>,
     playerHealth: number,
     healPlayer: (amount: number) => void,
     damageEnemy: (amount: number) => void,
@@ -60,7 +59,7 @@ export function useSpellSystem(
             }
 
             // Deduct mana and apply spell effects
-            setMana(mana - spell.manaCost);
+            setMana(m => m - spell.manaCost);
             // Start cooldown
             setCooldowns(cd => ({ ...cd, [spell.id]: spell.cooldown }));
 
